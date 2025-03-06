@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlipZero</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #f8f9fa;
+            --text-color: #333333;
+            --light-color: #ffffff;
+            --dark-color: #343a40;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+        }
+
+        .navbar-brand, .nav-link {
+            color: var(--light-color) !important;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        #home {
+            background-color: var(--light-color);
+        }
+
+        #about {
+            background-color: var(--secondary-color);
+        }
+
+        #services {
+            background-color: var(--light-color);
+        }
+
+        #contact {
+            background-color: var(--secondary-color);
+        }
+
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 20px 0;
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .image-placeholder {
+            background-color: #ddd;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">FlipZero</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="container text-center">
+            <div class="section-content">
+                <h1 class="display-4">WELCOME TO FLIPZERO SECURITY</h1>
+                <p class="lead">Protecting Small & Midsize Businesses from Security Threats</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-2">
+                    <div class="image-placeholder">Image Placeholder</div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="section-content">
+                        <h2 class="mb-4">ABOUT FLIPZERO</h2>
+                        <p>FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services. FlipZero focuses on assisting these organizations.</p>
+                        <p>No one should go without proper security because of incredible costs or lack of knowledge. Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="image-placeholder">Image Placeholder</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="section-content">
+                        <h2 class="mb-4">SECURITY SERVICES</h2>
+                        <p class="mb-4">WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS</p>
+                        <ul>
+                            <li>Data discovery and classification</li>
+                            <li>Data redaction, data encryption</li>
+                            <li>Static and dynamic data masking</li>
+                            <li>Data activity monitoring</li>
+                            <li>Comprehensive threat assessments, and risk analysis</li>
+                            <li>Vulnerability assessment</li>
+                            <li>Cybersecurity awareness training</li>
+                            <li>Network penetration testing</li>
+                            <li>Phishing penetration testing</li>
+                            <li>Intrusion detection & prevention services</li>
+                            <li>Securing of email systems</li>
+                            <li>Installation, configuration, testing, maintenance and monitoring of software and hardware tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-2">
+                    <div class="image-placeholder">Image Placeholder</div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="section-content text-center">
+                        <h2 class="mb-4">CONTACT US</h2>
+                        <p class="mb-4">WE WILL RESPOND WITHIN 48 HRS</p>
+                        <p>We are ready to answer any of your security concerns</p>
+                        <p>Please contact us via email: <a href="mailto:info@flipzero.net">info@flipzero.net</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2025 FlipZero Security. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
