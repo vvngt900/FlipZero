@@ -8,31 +8,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- AOS Animation Library -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a237e;    /* Deep blue */
             --secondary: #0d47a1;  /* Medium blue */
             --accent: #2962ff;     /* Bright blue */
+            --accent-glow: #00b0ff; /* Glowing blue */
             --light: #e3f2fd;      /* Light blue */
             --dark: #102027;       /* Dark blue-gray */
+            --cyber-green: #d7d7d7; /* Cybersecurity green */
+            --cyber-red: #ff3d71;  /* Alert red */
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: #333;
             overflow-x: hidden;
+            background-color: #fafafa;
+        }
+        
+        h1, h2, h3, h4, .navbar-brand, .cyber-text {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
         }
         
         .navbar {
-            background-color: var(--primary);
+            background-color: rgb(0 0 0 / 73%);
             padding: 1rem 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         
         .navbar-brand {
-            font-weight: 700;
+            font-weight: 900;
             color: white !important;
             font-size: 1.5rem;
+            text-shadow: 0 0 10px var(--accent-glow);
+            letter-spacing: 2px;
         }
         
         .nav-link {
@@ -40,6 +55,25 @@
             font-weight: 500;
             margin: 0 0.5rem;
             transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--cyber-green);
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--cyber-green);
+        }
+        
+        .nav-link:hover:after, .nav-link.active:after {
+            visibility: visible;
+            width: 100%;
         }
         
         .nav-link:hover, .nav-link.active {
@@ -53,21 +87,53 @@
             display: flex;
             align-items: center;
             position: relative;
+            overflow: hidden;
         }
         
         #home {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--dark), var(--primary));
             color: white;
+            position: relative;
         }
         
         .hero-text {
             text-align: center;
+            position: relative;
+            z-index: 5;
         }
         
         h1 {
             font-size: 3.5rem;
-            font-weight: 700;
+            font-weight: 900;
             margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+        
+        h1 span {
+            color: var(--cyber-green);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1 span:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            bottom: -10px;
+            left: 0;
+            background-color: var(--cyber-green);
+            box-shadow: 0 0 15px var(--cyber-green);
+        }
+        
+        .lead {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         #about {
@@ -85,22 +151,46 @@
         
         .service-item {
             background: white;
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-item:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 4px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
             transition: all 0.3s ease;
         }
         
         .service-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-item:hover:before {
+            width: 100%;
         }
         
         .service-icon {
             color: var(--accent);
             font-size: 2rem;
             margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover .service-icon {
+            transform: scale(1.2);
+            color: var(--cyber-green);
         }
         
         #contact {
@@ -114,6 +204,20 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-form:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--cyber-green), var(--accent));
+            background-size: 200% 100%;
+            animation: gradient-shift 5s infinite linear;
         }
         
         .footer {
@@ -121,6 +225,8 @@
             color: white;
             padding: 2rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
         .section-title {
@@ -128,6 +234,7 @@
             margin-bottom: 3rem;
             font-weight: 700;
             text-align: center;
+            letter-spacing: 1px;
         }
         
         .section-title:after {
@@ -139,26 +246,48 @@
             width: 50px;
             height: 3px;
             background-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
         }
         
         .text-accent {
-            color: var(--accent);
+            color: var(--cyber-green);
         }
         
         .btn-primary {
-            background-color: var(--accent);
-            border-color: var(--accent);
+            background: linear-gradient(45deg, var(--accent), var(--accent-glow));
+            border: none;
             padding: 0.75rem 2rem;
             border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(41, 98, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(41, 98, 255, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
         }
         
         .btn-primary:hover {
-            background-color: var(--primary);
-            border-color: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(41, 98, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(41, 98, 255, 0.4);
+            background: linear-gradient(45deg, var(--accent-glow), var(--accent));
+        }
+        
+        .btn-primary:hover:before {
+            left: 100%;
         }
         
         /* Alternating sections content */
@@ -172,14 +301,331 @@
             flex-direction: row-reverse;
         }
         
+        /* Cyber-security elements */
+        .cyber-particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: var(--cyber-green);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 20s infinite linear;
+            z-index: 1;
+        }
+        
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            animation: grid-animation 20s infinite linear;
+        }
+        
+        .cyber-circle {
+            position: absolute;
+            border: 2px solid var(--cyber-green);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: pulse 4s infinite ease-in-out;
+        }
+        
+        .binary-stream {
+            position: absolute;
+            font-family: monospace;
+            color: rgba(0, 255, 204, 0.15);
+            white-space: nowrap;
+            font-size: 14px;
+            animation: binary-float 20s infinite linear;
+            z-index: 1;
+        }
+        
+        .lock-icon {
+            position: absolute;
+            color: var(--cyber-green);
+            font-size: 50px;
+            opacity: 0.1;
+            animation: float-rotate 15s infinite ease-in-out;
+            transform-origin: center;
+            z-index: 1;
+        }
+        
+        .shield-icon {
+            position: absolute;
+            color: var(--accent-glow);
+            font-size: 60px;
+            opacity: 0.1;
+            animation: pulse 8s infinite ease-in-out;
+            z-index: 1;
+        }
+        
+        .img-cyber {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
         .img-placeholder {
-            background-color: rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.1), rgba(0, 176, 255, 0.1));
             min-height: 300px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #666;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+        }
+        
+        .img-placeholder:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .circuit-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid var(--cyber-green);
+            opacity: 0.3;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .circuit-line {
+            position: absolute;
+            background-color: var(--cyber-green);
+            opacity: 0.5;
+            z-index: 2;
+        }
+        
+        /* Home page special elements */
+        .cyber-sphere {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 204, 0.1);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        
+        .cyber-sphere:before, .cyber-sphere:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 204, 0.1);
+            animation: sphere-rotate 20s infinite linear;
+            transform-origin: center;
+        }
+        
+        .cyber-sphere:after {
+            animation: sphere-rotate 15s infinite linear reverse;
+        }
+        
+        .data-node {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--cyber-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--cyber-green);
+            z-index: 2;
+            opacity: 0.7;
+        }
+        
+        .floating-lock {
+            position: absolute;
+            font-size: 30px;
+            color: white;
+            opacity: 0.8;
+            z-index: 2;
+            animation: float 5s infinite ease-in-out;
+        }
+        
+        .typing-effect:after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        
+        @keyframes binary-float {
+            0% { transform: translateY(0); opacity: 0.15; }
+            50% { opacity: 0.2; }
+            100% { transform: translateY(-1000px); opacity: 0.15; }
+        }
+        
+        @keyframes float-rotate {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        @keyframes grid-animation {
+            0% { transform: rotateX(20deg) translateZ(0); }
+            100% { transform: rotateX(20deg) translateZ(1000px); }
+        }
+        
+        @keyframes sphere-rotate {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        /* Glitch effect for text */
+        .glitch {
+            position: relative;
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch::before {
+            color: var(--cyber-red);
+            clip: rect(44px, 450px, 56px, 0);
+            left: 2px;
+        }
+        
+        .glitch::after {
+            color: var(--cyber-green);
+            clip: rect(44px, 450px, 46px, 0);
+            left: -2px;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(39px, 9999px, 62px, 0); transform: skew(0.4deg); }
+            5% { clip: rect(75px, 9999px, 59px, 0); transform: skew(0.81deg); }
+            10% { clip: rect(63px, 9999px, 92px, 0); transform: skew(0.74deg); }
+            15% { clip: rect(19px, 9999px, 37px, 0); transform: skew(0.07deg); }
+            20% { clip: rect(26px, 9999px, 9px, 0); transform: skew(0.29deg); }
+            25% { clip: rect(72px, 9999px, 75px, 0); transform: skew(0.84deg); }
+            30% { clip: rect(51px, 9999px, 24px, 0); transform: skew(0.71deg); }
+            35% { clip: rect(28px, 9999px, 81px, 0); transform: skew(0.05deg); }
+            40% { clip: rect(12px, 9999px, 23px, 0); transform: skew(0.01deg); }
+            45% { clip: rect(98px, 9999px, 4px, 0); transform: skew(0.01deg); }
+            50% { clip: rect(14px, 9999px, 20px, 0); transform: skew(0.68deg); }
+            55% { clip: rect(5px, 9999px, 80px, 0); transform: skew(0.42deg); }
+            60% { clip: rect(53px, 9999px, 35px, 0); transform: skew(0.28deg); }
+            65% { clip: rect(16px, 9999px, 24px, 0); transform: skew(0.54deg); }
+            70% { clip: rect(71px, 9999px, 69px, 0); transform: skew(0.1deg); }
+            75% { clip: rect(58px, 9999px, 71px, 0); transform: skew(0.94deg); }
+            80% { clip: rect(88px, 9999px, 95px, 0); transform: skew(0.38deg); }
+            85% { clip: rect(95px, 9999px, 85px, 0); transform: skew(0.56deg); }
+            90% { clip: rect(30px, 9999px, 93px, 0); transform: skew(0.09deg); }
+            95% { clip: rect(67px, 9999px, 74px, 0); transform: skew(0.67deg); }
+            100% { clip: rect(86px, 9999px, 11px, 0); transform: skew(0.31deg); }
+        }
+        
+        @keyframes glitch-skew {
+            0% { transform: skew(-0.1deg); }
+            10% { transform: skew(-0.2deg); }
+            20% { transform: skew(0.09deg); }
+            30% { transform: skew(0.01deg); }
+            40% { transform: skew(-0.15deg); }
+            50% { transform: skew(-0.1deg); }
+            60% { transform: skew(0.16deg); }
+            70% { transform: skew(0.14deg); }
+            80% { transform: skew(-0.18deg); }
+            90% { transform: skew(-0.06deg); }
+            100% { transform: skew(0.12deg); }
+        }
+        
+        /* Typing animation */
+        .typing {
+            border-right: 2px solid var(--cyber-green);
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--cyber-green); }
+        }
+        
+        /* Matrix rain effect */
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.05;
+        }
+        
+        .matrix-column {
+            position: absolute;
+            top: 0;
+            font-family: monospace;
+            color: var(--cyber-green);
+            font-size: 1.2rem;
+            animation: matrix-rain linear infinite;
+        }
+        
+        @keyframes matrix-rain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
         }
     </style>
 </head>
@@ -187,15 +633,12 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#home">FLIPZERO</a>
+            <a class="navbar-brand" href="#home">FLIP<span class="text-accent">ZERO</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
@@ -212,12 +655,43 @@
 
     <!-- Home Section -->
     <section id="home">
+        <!-- Cybersecurity background elements -->
+        <div class="cyber-grid"></div>
+        <div class="matrix-bg" id="matrix-bg"></div>
+        <div class="cyber-sphere"></div>
+        
+        <!-- Data nodes -->
+        <div class="data-node" style="top: 30%; left: 20%;"></div>
+        <div class="data-node" style="top: 70%; left: 80%;"></div>
+        <div class="data-node" style="top: 40%; left: 90%;"></div>
+        <div class="data-node" style="top: 80%; left: 30%;"></div>
+        <div class="data-node" style="top: 20%; left: 60%;"></div>
+        
+        <!-- Binary streams -->
+        <div class="binary-stream" style="top: 10%; left: 5%;">01001100 01110011 01100101 01100011 01010101</div>
+        <div class="binary-stream" style="top: 30%; left: 80%;">01110011 01100101 01100011 01010101 01010010</div>
+        <div class="binary-stream" style="top: 70%; left: 20%;">01010010 01001001 01010100 01011001 00100000</div>
+        
+        <!-- Floating icons -->
+        <i class="fas fa-lock lock-icon" style="top: 25%; left: 15%;"></i>
+        <i class="fas fa-shield-alt shield-icon" style="top: 65%; left: 85%;"></i>
+        <i class="fas fa-key lock-icon" style="top: 75%; left: 35%;"></i>
+        
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 hero-text" data-aos="fade-up" data-aos-duration="1000">
-                    <h1>WELCOME TO <span class="text-accent">FLIPZERO</span></h1>
-                    <p class="lead mb-4">We focus on providing small & midsize businesses an in-depth approach to avoiding security incidents</p>
-                    <a href="#about" class="btn btn-primary">Learn More</a>
+                    <h1 class="mb-4">WELCOME TO <span class="glitch" data-text="FLIPZERO">FLIPZERO</span></h1>
+                    
+                    <p class="lead mb-4 typing" id="typing-text">Securing small & midsize businesses in the digital age</p>
+                    
+                    <p class="lead mb-5" data-aos="fade-up" data-aos-delay="400">
+                        We focus on providing an in-depth approach to avoiding security incidents
+                    </p>
+                    
+                    <div data-aos="fade-up" data-aos-delay="600">
+                        <a href="#about" class="btn btn-primary me-3">Learn More</a>
+                        <a href="#services" class="btn btn-outline-light">Our Services</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -225,19 +699,31 @@
 
     <!-- About Section -->
     <section id="about">
+        <!-- Cyber elements -->
+        <i class="fas fa-code binary-stream" style="top: 15%; left: 5%;">01001100 01110011 01100101 01100011</i>
+        <i class="fas fa-shield-alt shield-icon" style="bottom: 15%; right: 10%;"></i>
+        <div class="cyber-circle" style="width: 300px; height: 300px; top: 10%; right: 5%;"></div>
+        <div class="cyber-circle" style="width: 200px; height: 200px; bottom: 10%; left: 5%;"></div>
+        
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">ABOUT FLIPZERO</h2>
+            <h2 class="section-title" data-aos="fade-up">ABOUT <span class="text-accent">FLIPZERO</span></h2>
             
             <div class="row content-left align-items-center">
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                     <div class="about-content">
+                        <h3 class="mb-3 cyber-text">Security For Everyone</h3>
                         <p>FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services.</p>
                         <p>FlipZero focuses on assisting these organizations. No one should go without proper security because of incredible costs or lack of knowledge.</p>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-                    <div class="img-placeholder">
-                        <span>Image Placeholder</span>
+                    <div class="img-placeholder img-cyber">
+                        <i class="fas fa-shield-alt" style="font-size: 80px; color: var(--cyber-green); opacity: 0.2;"></i>
+                        <div class="circuit-border"></div>
+                        <div class="circuit-line" style="width: 50px; height: 2px; top: 20%; left: 0;"></div>
+                        <div class="circuit-line" style="width: 2px; height: 50px; top: 0; right: 30%;"></div>
+                        <div class="circuit-line" style="width: 50px; height: 2px; bottom: 30%; right: 0;"></div>
+                        <div class="circuit-line" style="width: 2px; height: 40px; bottom: 0; left: 40%;"></div>
                     </div>
                 </div>
             </div>
@@ -245,6 +731,7 @@
             <div class="row content-right align-items-center mt-5">
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
                     <div class="about-content">
+                        <h3 class="mb-3 cyber-text">Protecting Your Business</h3>
                         <p>Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.</p>
                         <p>Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses need to safeguard diverse data types such as structured and unstructured, online and offline, and must do so across complex systems including cloud and onsite data environments.</p>
                     </div>
