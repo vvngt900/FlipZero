@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlipZero - Security Services</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a237e;    /* Deep blue */
+            --secondary: #0d47a1;  /* Medium blue */
+            --accent: #2962ff;     /* Bright blue */
+            --light: #e3f2fd;      /* Light blue */
+            --dark: #102027;       /* Dark blue-gray */
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        section {
+            min-height: 100vh;
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        #home {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .hero-text {
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        
+        #about {
+            background-color: white;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        #services {
+            background-color: var(--light);
+        }
+        
+        .service-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        #contact {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(41, 98, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(41, 98, 255, 0.4);
+        }
+        
+        /* Alternating sections content */
+        .content-left {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .content-right {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        
+        .img-placeholder {
+            background-color: rgba(0,0,0,0.1);
+            min-height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">FLIPZERO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 hero-text" data-aos="fade-up" data-aos-duration="1000">
+                    <h1>WELCOME TO <span class="text-accent">FLIPZERO</span></h1>
+                    <p class="lead mb-4">We focus on providing small & midsize businesses an in-depth approach to avoiding security incidents</p>
+                    <a href="#about" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">ABOUT FLIPZERO</h2>
+            
+            <div class="row content-left align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+                    <div class="about-content">
+                        <p>FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services.</p>
+                        <p>FlipZero focuses on assisting these organizations. No one should go without proper security because of incredible costs or lack of knowledge.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+                    <div class="img-placeholder">
+                        <span>Image Placeholder</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row content-right align-items-center mt-5">
+                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+                    <div class="about-content">
+                        <p>Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.</p>
+                        <p>Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses need to safeguard diverse data types such as structured and unstructured, online and offline, and must do so across complex systems including cloud and onsite data environments.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-right" data-aos-delay="300">
+                    <div class="img-placeholder">
+                        <span>Image Placeholder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">OUR SERVICES</h2>
+            <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS</p>
+            
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Data Security</h4>
+                        <ul class="list-unstyled">
+                            <li>Data discovery and classification</li>
+                            <li>Data redaction, data encryption</li>
+                            <li>Static and dynamic data masking</li>
+                            <li>Data activity monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>Risk Assessment</h4>
+                        <ul class="list-unstyled">
+                            <li>Comprehensive threat assessments</li>
+                            <li>Risk analysis</li>
+                            <li>Vulnerability assessment</li>
+                            <li>Cybersecurity awareness training</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h4>Penetration Testing</h4>
+                        <ul class="list-unstyled">
+                            <li>Network penetration testing</li>
+                            <li>Phishing penetration testing</li>
+                            <li>Intrusion detection & prevention services</li>
+                            <li>Securing of email systems</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mx-auto mt-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Implementation</h4>
+                        <ul class="list-unstyled">
+                            <li>Installation, configuration, testing</li>
+                            <li>Maintenance and monitoring</li>
+                            <li>Software and hardware tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">CONTACT US</h2>
+            <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">WE WILL RESPOND WITHIN 48 HRS</p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-form">
+                        <p class="text-center mb-4">We are ready to answer any of your security concerns.<br>Please contact us via email <a href="mailto:info@flipzero.net">info@flipzero.net</a></p>
+                        
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>&copy; 2025 FlipZero. All rights reserved.</p>
+                    <p>Cybersecurity solutions for small and midsize businesses</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap and jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 1000,
+            once: false
+        });
+        
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Re-trigger animations when sections enter viewport
+        window.addEventListener('scroll', function() {
+            const animatedElements = document.querySelectorAll('[data-aos]');
+            
+            animatedElements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition.top < windowHeight && elementPosition.bottom > 0) {
+                    element.setAttribute('data-aos-offset', '0');
+                    AOS.refresh();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
