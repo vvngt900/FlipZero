@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlipZero - Cybersecurity Solutions</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- AOS Library for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Color Palette */
+            --primary: #0a192f;      /* Dark Blue */
+            --secondary: #64ffda;    /* Teal Accent */
+            --tertiary: #8892b0;     /* Slate Gray */
+            --quaternary: #e6f1ff;   /* Light Blue-White */
+            --dark: #020c1b;         /* Extra Dark Blue */
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            color: var(--quaternary);
+            background-color: var(--primary);
+            scroll-behavior: smooth;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        .text-accent {
+            color: var(--secondary);
+        }
+
+        /* Header Styles */
+        .navbar {
+            background-color: rgba(2, 12, 27, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+            transition: all 0.3s ease;
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: var(--secondary) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--quaternary) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--secondary) !important;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Section Styles */
+        #home {
+            background-color: var(--primary);
+            position: relative;
+        }
+
+        #about {
+            background-color: var(--dark);
+        }
+
+        #services {
+            background-color: var(--primary);
+        }
+
+        #contact {
+            background-color: var(--dark);
+        }
+
+        /* Cybersecurity Elements */
+        .cyber-element {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+
+        .cyber-circle {
+            position: absolute;
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            opacity: 0.05;
+        }
+
+        .binary-stream {
+            position: absolute;
+            font-family: monospace;
+            color: var(--secondary);
+            font-size: 12px;
+            line-height: 12px;
+            white-space: nowrap;
+            opacity: 0.1;
+            overflow: hidden;
+            width: 20px;
+            z-index: 0;
+        }
+
+        /* Home Section */
+        .welcome-heading {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .shield-icon {
+            font-size: 8rem;
+            color: var(--secondary);
+            opacity: 0.2;
+            transform: rotate(-15deg);
+            position: absolute;
+            right: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .lock-icon {
+            font-size: 6rem;
+            color: var(--secondary);
+            opacity: 0.2;
+            transform: rotate(15deg);
+            position: absolute;
+            left: 10%;
+            top: 30%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-30px) rotate(-5deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+
+        /* About Section */
+        .about-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Services Section */
+        .service-card {
+            background-color: rgba(10, 25, 47, 0.7);
+            border-left: 3px solid var(--secondary);
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            transform: translateX(-20px);
+            opacity: 0;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+
+        .services-heading {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .services-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            line-height: 1.4;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            background-color: rgba(10, 25, 47, 0.5);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            padding: 2rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-text {
+            color: var(--tertiary);
+            font-size: 0.9rem;
+        }
+
+        .social-icon {
+            color: var(--tertiary);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--secondary);
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--quaternary);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        /* Custom Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* Binary code animation */
+        @keyframes binaryScroll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .welcome-heading {
+                font-size: 2.5rem;
+            }
+            .shield-icon, .lock-icon {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+            .contact-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+    <!-- Header -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">FLIP<span class="text-accent">ZERO</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="d-flex align-items-center justify-content-center">
+        <div class="cyber-grid"></div>
+        <i class="fas fa-shield-alt shield-icon"></i>
+        <i class="fas fa-lock lock-icon"></i>
+        
+        <!-- Binary streams -->
+        <div class="binary-stream" style="left: 10%; top: 20%; animation: binaryScroll 20s linear infinite;">
+            01001010 01100001 01110110 01100001
+        </div>
+        <div class="binary-stream" style="right: 15%; top: 40%; animation: binaryScroll 15s linear infinite;">
+            01010011 01100011 01110010 01101001
+        </div>
+        
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <h1 class="welcome-heading fade-up" data-aos="fade-up">
+                        WELCOME TO <span class="text-accent">FLIPZERO</span>
+                    </h1>
+                    <p class="lead mb-5 fade-up delay-1" data-aos="fade-up" data-aos-delay="100">
+                        Providing affordable and effective cybersecurity solutions for small and midsize businesses
+                    </p>
+                    <div class="fade-up delay-2" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#about" class="btn btn-outline-light btn-lg px-4 me-2">Learn More</a>
+                        <a href="#contact" class="btn btn-outline-info btn-lg px-4">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="cyber-grid"></div>
+        
+        <!-- Cybersecurity design elements -->
+        <div class="cyber-circle" style="width: 300px; height: 300px; right: -150px; top: 20%;"></div>
+        <div class="cyber-circle" style="width: 400px; height: 400px; left: -200px; bottom: 10%;"></div>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 about-container" data-aos="fade-right">
+                    <h5 class="text-accent mb-3">WHO WE ARE</h5>
+                    <h2 class="mb-4">ABOUT FLIPZERO</h2>
+                    <div class="about-text">
+                        <p>FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services.</p>
+                        <p>FlipZero focuses on assisting these organizations. No one should go without proper security because of incredible costs or lack of knowledge.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+                    <div class="about-container p-4">
+                        <p>Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.</p>
+                        <p>Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses need to safeguard diverse data types such as structured and unstructured, online and offline, and must do so across complex systems including cloud and onsite data environments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="cyber-grid"></div>
+        
+        <!-- Cybersecurity design elements -->
+        <div class="cyber-circle" style="width: 300px; height: 300px; right: -150px; bottom: 20%;"></div>
+        <div class="cyber-circle" style="width: 200px; height: 200px; left: -100px; top: 30%;"></div>
+        
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <h5 class="services-heading text-accent">OUR SERVICES</h5>
+                    <h2 class="services-title">WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+                    <div class="service-card service-item">
+                        <h4 class="mb-3"><i class="fas fa-database me-2 text-accent"></i> Data Services</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Data discovery and classification</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Data redaction, data encryption</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Static and dynamic data masking</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Data activity monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+                    <div class="service-card service-item">
+                        <h4 class="mb-3"><i class="fas fa-shield-alt me-2 text-accent"></i> Security Assessment</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Comprehensive threat assessments, and risk analysis</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Vulnerability assessment</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Cybersecurity awareness training</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
+                    <div class="service-card service-item">
+                        <h4 class="mb-3"><i class="fas fa-user-secret me-2 text-accent"></i> Penetration Testing</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Network penetration testing</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Phishing penetration testing</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="400">
+                    <div class="service-card service-item">
+                        <h4 class="mb-3"><i class="fas fa-lock me-2 text-accent"></i> Protection Services</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Intrusion detection & prevention services</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Securing of email systems</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Installation, configuration, testing, maintenance and monitoring of software and hardware tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="cyber-grid"></div>
+        
+        <!-- Cybersecurity design elements -->
+        <div class="cyber-circle" style="width: 400px; height: 400px; right: -200px; bottom: -200px;"></div>
+        <div class="cyber-circle" style="width: 200px; height: 200px; left: -100px; top: 20%;"></div>
+        
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-container text-center" data-aos="zoom-in">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h2 class="mb-4">WE WILL RESPOND WITHIN 48 HRS</h2>
+                        <p class="lead mb-4">We are ready to answer any of your security concerns</p>
+                        <p>Please contact us via email:</p>
+                        <a href="mailto:info@flipzero.net" class="btn btn-outline-light btn-lg mt-3">
+                            <i class="fas fa-envelope me-2"></i>info@flipzero.net
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="navbar-brand mb-4 d-block" href="#home">FLIP<span class="text-accent">ZERO</span></a>
+                    <div class="mb-4">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <p class="footer-text">© 2025 FlipZero. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button id="scroll-top" class="btn btn-sm btn-secondary rounded-circle position-fixed bottom-0 end-0 translate-middle d-none" 
+            style="width: 3rem; height: 3rem; z-index: 999;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: false
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active nav link
+                        document.querySelectorAll('.nav-link').forEach(navLink => {
+                            navLink.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Scroll Top Button
+            const scrollTopBtn = document.getElementById('scroll-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.remove('d-none');
+                    scrollTopBtn.classList.add('d-flex', 'align-items-center', 'justify-content-center');
+                } else {
+                    scrollTopBtn.classList.add('d-none');
+                    scrollTopBtn.classList.remove('d-flex', 'align-items-center', 'justify-content-center');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Create binary streams animation
+            function createBinaryStream() {
+                const stream = document.createElement('div');
+                stream.className = 'binary-stream';
+                stream.style.left = Math.random() * 100 + '%';
+                stream.style.top = Math.random() * 100 + '%';
+                stream.style.animation = `binaryScroll ${10 + Math.random() * 10}s linear infinite`;
+                
+                let binary = '';
+                for (let i = 0; i < 50; i++) {
+                    binary += Math.round(Math.random()) + ' ';
+                }
+                stream.textContent = binary;
+                
+                document.body.appendChild(stream);
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    stream.remove();
+                }, 20000);
+            }
+            
+            // Create binary streams periodically
+            setInterval(createBinaryStream, 5000);
+            
+            // Initial creation of some streams
+            for (let i = 0; i < 5; i++) {
+                createBinaryStream();
+            }
+
+            // Service cards animation when scrolling
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            // Intersection Observer for service cards
+            const observeServices = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateX(0)';
+                        }, index * 200); // Staggered delay
+                    } else {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateX(-20px)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            serviceCards.forEach(card => {
+                observeServices.observe(card);
+            });
+
+            // Activate the appropriate nav link on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                    if (navLink.getAttribute('href') === `#${current}`) {
+                        navLink.classList.add('active');
+                    }
+                });
+            });
+
+            // Create cyber circles periodically for visual effect
+            function createCyberCircle() {
+                const circle = document.createElement('div');
+                circle.className = 'cyber-circle';
+                
+                const size = 50 + Math.random() * 200;
+                circle.style.width = size + 'px';
+                circle.style.height = size + 'px';
+                
+                // Position randomly but exclude center of screen
+                let left, top;
+                do {
+                    left = Math.random() * 100;
+                    top = Math.random() * 100;
+                } while (left > 30 && left < 70 && top > 30 && top < 70);
+                
+                circle.style.left = left + '%';
+                circle.style.top = top + '%';
+                
+                // Add to a random section
+                const sections = document.querySelectorAll('section');
+                const randomSection = sections[Math.floor(Math.random() * sections.length)];
+                randomSection.appendChild(circle);
+                
+                // Remove after some time
+                setTimeout(() => {
+                    circle.remove();
+                }, 30000);
+            }
+            
+            // Create cyber circles periodically
+            setInterval(createCyberCircle, 10000);
+            
+            // Initial creation of some cyber circles
+            for (let i = 0; i < 3; i++) {
+                createCyberCircle();
+            }
+        });
+    </script>
+</body>
+</html>

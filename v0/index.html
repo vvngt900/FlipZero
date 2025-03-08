@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlipZero - Security Solutions</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <style>
+        :root {
+            --primary: #0B63E5;
+            --secondary: #25CED1;
+            --accent: #FCCB06;
+            --dark: #2A2A2A;
+            --light: #F5F5F5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .section {
+            min-height: 100vh;
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        #home {
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+        }
+        
+        #about {
+            background: linear-gradient(135deg, #ffffff 0%, var(--light) 100%);
+        }
+        
+        #services {
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+        }
+        
+        #contact {
+            background: linear-gradient(135deg, #ffffff 0%, var(--light) 100%);
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+        }
+        
+        .heading-box {
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0950c0;
+            border-color: #0950c0;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .service-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            border: none;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        .text-primary {
+            color: var(--primary) !important;
+        }
+        
+        .text-secondary {
+            color: var(--secondary) !important;
+        }
+        
+        .text-accent {
+            color: var(--accent) !important;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Scroll to section smoothly */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Logo styling */
+        .logo {
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .accent-bg {
+            background-color: var(--accent);
+        }
+        
+        .section-divider {
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 0;
+        }
+        
+        /* Left-right alternating content */
+        .content-section:nth-child(odd) .content-image {
+            order: 1;
+        }
+        
+        .content-section:nth-child(odd) .content-text {
+            order: 2;
+        }
+        
+        .content-section:nth-child(even) .content-image {
+            order: 2;
+        }
+        
+        .content-section:nth-child(even) .content-text {
+            order: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .content-section .content-image,
+            .content-section .content-text {
+                order: unset !important;
+            }
+        }
+        
+        .img-fluid {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo" href="#home">FLIPZERO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <div class="container">
+            <div class="row align-items-center content-section">
+                <div class="col-lg-6 content-text" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="heading-box">
+                        <h1 class="display-4 fw-bold">WELCOME TO <br><span class="text-primary">FLIPZERO</span></h1>
+                    </div>
+                    <p class="lead mb-4">Securing your business with innovative solutions. We provide comprehensive security assessments and solutions for businesses of all sizes.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#services" class="btn btn-primary btn-lg">Our Services</a>
+                        <a href="#contact" class="btn btn-outline-primary btn-lg">Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 content-image mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1000">
+                    <!-- Placeholder for image -->
+                    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cisco.com%2Fsite%2Fus%2Fen%2Flearn%2Ftopics%2Fsecurity%2Fwhat-is-cybersecurity.html&psig=AOvVaw09NNC4QW-nEHKQI8U1TDnn&ust=1741520757861000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMiuzsu0-osDFQAAAAAdAAAAABAE" alt="Security Solutions" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <hr class="section-divider">
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="row align-items-center content-section">
+                <div class="col-lg-6 content-image mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+                    <!-- Placeholder for image -->
+                    <img src="https://via.placeholder.com/600x400?text=About+FlipZero" alt="About FlipZero" class="img-fluid">
+                </div>
+                <div class="col-lg-6 content-text" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="heading-box">
+                        <h2 class="display-5 fw-bold">ABOUT <span class="text-primary">FLIPZERO</span></h2>
+                    </div>
+                    <p class="lead mb-4">FlipZero firmly believes that all business security risks should be assessed and addressed.</p>
+                    <p>Small and medium-sized businesses often face unique security challenges that require tailored solutions. At FlipZero, we understand these challenges and provide custom security frameworks to protect your assets.</p>
+                    <p>Our team of expert security professionals has years of experience in identifying vulnerabilities and implementing robust security measures that align with your business goals.</p>
+                    <div class="mt-4">
+                        <a href="#services" class="btn btn-primary">Explore Our Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <hr class="section-divider">
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="display-5 fw-bold">OUR <span class="text-primary">SERVICES</span></h2>
+                <p class="lead">Comprehensive security solutions for your business needs</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Service 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                    <div class="card service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                            <h4 class="mb-3">Risk Assessment</h4>
+                            <p>Comprehensive evaluation of your existing security infrastructure to identify vulnerabilities and potential threats.</p>
+                            <a href="#contact" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                    <div class="card service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="bi bi-laptop"></i>
+                            </div>
+                            <h4 class="mb-3">Cyber Security</h4>
+                            <p>Advanced solutions to protect your digital assets from cyber threats, including malware, phishing, and ransomware attacks.</p>
+                            <a href="#contact" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                    <div class="card service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <h4 class="mb-3">Physical Security</h4>
+                            <p>Comprehensive physical security solutions including access control systems, surveillance, and security personnel training.</p>
+                            <a href="#contact" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                    <div class="card service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h4 class="mb-3">Staff Training</h4>
+                            <p>Security awareness training programs to ensure your employees understand security best practices and protocols.</p>
+                            <a href="#contact" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+                    <div class="card service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h4 class="mb-3">Security Monitoring</h4>
+                            <p>24/7 monitoring of your security systems to detect and respond to potential threats in real-time.</p>
+                            <a href="#contact" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
+                    <div class="card service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="bi bi-file-earmark-text"></i>
+                            </div>
+                            <h4 class="mb-3">Compliance</h4>
+                            <p>Assistance with security compliance requirements to ensure your business meets industry standards and regulations.</p>
+                            <a href="#contact" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <hr class="section-divider">
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="heading-box">
+                        <h2 class="display-5 fw-bold">GET IN <span class="text-primary">TOUCH</span></h2>
+                    </div>
+                    <p class="lead mb-4">Have questions or want to discuss your security needs? Contact us today!</p>
+                    
+                    <div class="contact-info mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="contact-icon"><i class="bi bi-geo-alt"></i></span>
+                            <span>123 Security Street, Tech City, TC 12345</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="contact-icon"><i class="bi bi-envelope"></i></span>
+                            <span>info@flipzero.com</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="contact-icon"><i class="bi bi-telephone"></i></span>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="contact-icon"><i class="bi bi-clock"></i></span>
+                            <span>Mon-Fri: 9:00 AM - 5:00 PM</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-media">
+                        <h5 class="mb-3">Follow Us</h5>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="text-primary fs-4"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="text-primary fs-4"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="text-primary fs-4"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="text-primary fs-4"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="card p-4 shadow">
+                        <h4 class="mb-4">Send us a message</h4>
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" placeholder="Enter subject">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="4" placeholder="Enter your message"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="logo mb-3">FLIPZERO</h4>
+                    <p>Providing comprehensive security solutions for businesses of all sizes.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2023 FlipZero. All rights reserved.</p>
+                    <div>
+                        <a href="#" class="text-light me-3">Privacy Policy</a>
+                        <a href="#" class="text-light">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS animation library
+        AOS.init();
+        
+        // Handle active nav links
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function setActiveLink() {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Update active link on scroll
+        window.addEventListener('scroll', setActiveLink);
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Ensure animations play each time element comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // If element has AOS attributes, reset them to trigger animation again
+                    if (entry.target.hasAttribute('data-aos')) {
+                        entry.target.classList.add('aos-animate');
+                    }
+                } else {
+                    // Remove the class when element is not in view
+                    if (entry.target.hasAttribute('data-aos')) {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        // Observe all elements with AOS attributes
+        document.querySelectorAll('[data-aos]').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
