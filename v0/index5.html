@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlipZero - Cybersecurity Solutions</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #64ffda;
+            --accent-color: #f06292;
+            --light-color: #e6f1ff;
+            --dark-color: #020c1b;
+            --section1-bg: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            --section2-bg: linear-gradient(135deg, #172a45 0%, #303f9f 100%);
+            --section3-bg: linear-gradient(135deg, #303f9f 0%, #00796b 100%);
+            --section4-bg: linear-gradient(135deg, #00796b 0%, #0a192f 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--light-color);
+            overflow-x: hidden;
+            background-color: var(--dark-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            transition: background 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home {
+            background: var(--section1-bg);
+        }
+
+        #about {
+            background: var(--section2-bg);
+        }
+
+        #services {
+            background: var(--section3-bg);
+        }
+
+        #contact {
+            background: var(--section4-bg);
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: rgba(10, 25, 47, 0.9) !important;
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: var(--secondary-color) !important;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: var(--light-color) !important;
+            margin: 0 10px;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Home Section */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-custom {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+        }
+
+        .btn-custom:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about-title {
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Services Section */
+        .services-title {
+            color: var(--secondary-color);
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+
+        /* Contact Section */
+        .contact-title {
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .contact-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-email {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-email:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--light-color);
+            box-shadow: none;
+            border: 1px solid var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 100;
+        }
+
+        .footer-text {
+            color: var(--light-color);
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        /* Cybersecurity Elements */
+        .cyber-element {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .binary {
+            font-family: monospace;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s linear infinite;
+        }
+
+        .circuit {
+            border: 1px solid var(--secondary-color);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.1;
+            animation: rotate 30s linear infinite;
+        }
+
+        .circuit::before, .circuit::after {
+            content: '';
+            position: absolute;
+            background-color: var(--secondary-color);
+        }
+
+        .circuit::before {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+        }
+
+        .circuit::after {
+            width: 1px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+        }
+
+        .lock {
+            position: absolute;
+            font-size: 5rem;
+            color: var(--secondary-color);
+            opacity: 0.1;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            .about-title, .services-title, .contact-title {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .about-text, .contact-text {
+                font-size: 1rem;
+            }
+            .section {
+                padding: 60px 0;
+            }
+            .content-right, .content-left {
+                text-align: center !important;
+            }
+        }
+
+        /* Content Alignment */
+        .content-left {
+            text-align: left;
+        }
+
+        .content-right {
+            text-align: right;
+        }
+
+        .content-center {
+            text-align: center;
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--secondary-color);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">FLIPZERO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <canvas class="matrix-rain"></canvas>
+        <div class="cyber-element binary" style="top: 20%; left: 10%;">01001100</div>
+        <div class="cyber-element binary" style="top: 40%; right: 15%;">10110101</div>
+        <div class="cyber-element circuit" style="bottom: 10%; right: 20%;"></div>
+        <div class="cyber-element lock" style="top: 30%; right: 30%;"><i class="fas fa-shield-alt"></i></div>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 text-center hero-content">
+                    <h1 class="hero-title" data-aos="fade-up" data-aos-duration="1000">WELCOME TO FLIPZERO</h1>
+                    <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        Securing Small & Midsize Businesses with Affordable Cybersecurity Solutions
+                    </p>
+                    <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                        <a href="#services" class="btn btn-custom me-3">Our Services</a>
+                        <a href="#contact" class="btn btn-custom">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="cyber-element binary" style="bottom: 20%; left: 15%;">01110011</div>
+        <div class="cyber-element circuit" style="top: 15%; left: 10%;"></div>
+        <div class="cyber-element lock" style="bottom: 25%; right: 15%;"><i class="fas fa-lock"></i></div>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="about-title" data-aos="fade-up">ABOUT FLIPZERO</h2>
+                </div>
+                <div class="col-lg-6 content-left" data-aos="fade-right" data-aos-duration="1000">
+                    <p class="about-text">
+                        FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services.
+                    </p>
+                    <p class="about-text">
+                        FlipZero focuses on assisting these organizations. No one should go without proper security because of incredible costs or lack of knowledge.
+                    </p>
+                </div>
+                <div class="col-lg-6 content-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <p class="about-text">
+                        Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.
+                    </p>
+                    <p class="about-text">
+                        Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses need to safeguard diverse data types such as structured and unstructured, online and offline, and must do so across complex systems including cloud and onsite data environments.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a href="#services" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="cyber-element binary" style="top: 30%; right: 10%;">10101010</div>
+        <div class="cyber-element circuit" style="bottom: 20%; left: 5%;"></div>
+        <div class="cyber-element lock" style="top: 15%; left: 20%;"><i class="fas fa-user-shield"></i></div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="services-title" data-aos="fade-up">OUR SERVICES</h2>
+                    <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">
+                        WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="service-title">Data Management</h3>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Data discovery and classification</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Data redaction, data encryption</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Static and dynamic data masking</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Data activity monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="service-title">Security Assessment</h3>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Comprehensive threat assessments</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Risk analysis</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Vulnerability assessment</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Cybersecurity awareness training</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="service-title">Network Security</h3>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Network penetration testing</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Phishing penetration testing</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Intrusion detection & prevention</li>
+                            <li><i class="fas fa-check-circle me-2 text-secondary"></i> Securing of email systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6 mx-auto" data-aos="fade-up" data-aos-delay="700" data-aos-duration="800">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="service-title">Implementation & Maintenance</h3>
+                        <p>Installation, configuration, testing, maintenance and monitoring of software and hardware tools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#contact" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="cyber-element binary" style="bottom: 15%; right: 10%;">01001111</div>
+        <div class="cyber-element circuit" style="top: 20%; right: 15%;"></div>
+        <div class="cyber-element lock" style="bottom: 30%; left: 10%;"><i class="fas fa-envelope-open-text"></i></div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="contact-title" data-aos="fade-up">CONTACT US</h2>
+                    <p class="contact-text" data-aos="fade-up" data-aos-delay="200">
+                        WE WILL RESPOND WITHIN 48 HRS
+                    </p>
+                    <p class="contact-text" data-aos="fade-up" data-aos-delay="300">
+                        We are ready to answer any of your security concerns
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="contact-form">
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-custom w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+                    <div class="d-flex flex-column justify-content-center h-100">
+                        <div class="text-center text-lg-start">
+                            <p class="mb-4 fs-5">Please contact us via email:</p>
+                            <a href="mailto:info@flipzero.net" class="contact-email">
+                                <i class="fas fa-envelope me-2"></i>info@flipzero.net
+                            </a>
+                            <div class="mt-5">
+                                <div class="d-flex justify-content-center justify-content-lg-start mt-4">
+                                    <a href="#" class="me-3 fs-3 text-light"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="me-3 fs-3 text-light"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="fs-3 text-light"><i class="fab fa-facebook"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">&copy; 2025 FlipZero. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: false,
+            mirror: true
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(navLink => {
+                navLink.classList.remove('active');
+                if (navLink.getAttribute('href') === `#${current}`) {
+                    navLink.classList.add('active');
+                }
+            });
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.querySelector('.matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = '01'.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawMatrixRain() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#64ffda';
+            ctx.font = `${fontSize}px monospace`;
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters[Math.floor(Math.random() * characters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrixRain, 50);
+
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Animate services on scroll
+        const animateServices = () => {
+            const serviceItems = document.querySelectorAll('.service-item');
+            serviceItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = `all 0.5s ease ${index * 0.2}s`;
+                
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        };
+
+        // Trigger animations when scrolling to services section
+        const servicesSection = document.querySelector('#services');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateServices();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(servicesSection);
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '10px 0';
+                navbar.style.backgroundColor = 'rgba(10, 25, 47, 0.95) !important';
+            } else {
+                navbar.style.padding = '15px 0';
+                navbar.style.backgroundColor = 'rgba(10, 25, 47, 0.9) !important';
+            }
+        });
+
+        // Re-trigger animations when tab is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                setTimeout(() => {
+                    AOS.refresh();
+                    if (this.getAttribute('href') === '#services') {
+                        animateServices();
+                    }
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
+
