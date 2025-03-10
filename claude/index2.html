@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlipZero Cybersecurity</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <style>
+    :root {
+      --primary-color: #050A30;
+      --secondary-color: #2962FF;
+      --accent-color: #00D4FF;
+      --text-color: #FFFFFF;
+      --dark-bg: #020617;
+      --light-bg: #0F172A;
+      --about-bg: #121063;
+      --services-bg: #1A237E;
+      --contact-bg: #311B92;
+      --gradient-primary: linear-gradient(to right, #2962FF, #00D4FF);
+      --transition-time: 0.5s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-color);
+      background-color: var(--dark-bg);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+    }
+
+    section {
+      min-height: 100vh;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+      transition: background-color var(--transition-time) ease;
+    }
+
+    /* Header & Navigation */
+    .navbar {
+      background-color: rgba(5, 10, 48, 0.95);
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all var(--transition-time) ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-brand {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--accent-color) !important;
+      position: relative;
+      letter-spacing: 1px;
+    }
+
+    .navbar-brand::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient-primary);
+    }
+
+    .navbar-toggler {
+      border: none;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    .nav-link {
+      color: var(--text-color) !important;
+      font-weight: 500;
+      padding: 8px 15px !important;
+      margin: 0 5px;
+      position: relative;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .nav-link.active::before {
+      width: 100%;
+    }
+
+    /* Cyber Elements Animation */
+    .cyber-element {
+      position: absolute;
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .circuit-lines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .floating-particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      opacity: 0.3;
+      filter: blur(2px);
+      animation: floatParticle 15s infinite linear;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(100px, 50px); }
+      50% { transform: translate(50px, 100px); }
+      75% { transform: translate(-50px, 50px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .cyber-sphere {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--accent-color), transparent);
+      animation: pulsate 8s infinite alternate;
+    }
+
+    @keyframes pulsate {
+      0% { transform: scale(1); opacity: 0.1; }
+      50% { transform: scale(1.1); opacity: 0.2; }
+      100% { transform: scale(1); opacity: 0.1; }
+    }
+
+    .binary-stream {
+      position: absolute;
+      font-family: monospace;
+      font-size: 14px;
+      color: var(--accent-color);
+      opacity: 0.1;
+      pointer-events: none;
+      animation: scrollBinary 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes scrollBinary {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100%); }
+    }
+
+    /* Digital Rain Animation */
+    .digital-rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .rain-column {
+      position: absolute;
+      top: -100px;
+      color: var(--accent-color);
+      font-family: monospace;
+      font-size: 14px;
+      opacity: 0.2;
+      animation: digitalRain 15s infinite linear;
+    }
+
+    @keyframes digitalRain {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 0.2; }
+      90% { opacity: 0.2; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Glowing Network */
+    .network-line {
+      position: absolute;
+      background: var(--accent-color);
+      height: 1px;
+      opacity: 0.2;
+      transform-origin: left;
+      animation: networkPulse 10s infinite alternate;
+    }
+
+    @keyframes networkPulse {
+      0% { opacity: 0.1; transform: scaleX(0.8); }
+      50% { opacity: 0.3; }
+      100% { opacity: 0.1; transform: scaleX(1); }
+    }
+
+    /* Home Section */
+    #home {
+      background-color: var(--dark-bg);
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-heading {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.3s;
+    }
+
+    .hero-subtext {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.6s;
+    }
+
+    .hero-btn {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.9s;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 212, 255, 0.4);
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .shield-icon {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .shield-outer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(41, 98, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 4s infinite alternate;
+    }
+
+    .shield-inner {
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      background: rgba(0, 212, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 4s infinite alternate 2s;
+    }
+
+    .shield-center {
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+    }
+
+    .shield-icon i {
+      font-size: 50px;
+      color: white;
+    }
+
+    /* About Section */
+    #about {
+      background-color: var(--about-bg);
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--gradient-primary);
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-feature {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      border-left: 3px solid var(--accent-color);
+    }
+
+    .about-feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .about-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+    }
+
+    .about-feature-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    /* Services Section */
+    #services {
+      background-color: var(--services-bg);
+      padding-top: 100px;
+    }
+
+    .services-intro {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 25px;
+      height: 100%;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+
+    .service-title {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    .service-description {
+      opacity: 0.9;
+    }
+
+    /* Contact Section */
+    #contact {
+      background-color: var(--contact-bg);
+    }
+
+    .contact-wrapper {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(41, 98, 255, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
+      z-index: -1;
+    }
+
+    .contact-heading {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-subheading {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.8;
+    }
+
+    .contact-info {
+      margin-bottom: 20px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 500;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .contact-email:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-icon {
+      font-size: 4rem;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-bg);
+      padding: 20px 0;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 999;
+    }
+
+    .footer-text {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    /* Section Transition Animation */
+    .section-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-primary);
+      transform: translateY(100%);
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    /* Animated Lock Icon */
+    .animated-lock {
+      position: absolute;
+      right: 10%;
+      top: 30%;
+      font-size: 40px;
+      color: var(--accent-color);
+      opacity: 0.3;
+      animation: lockPulse 4s infinite;
+    }
+
+    @keyframes lockPulse {
+      0% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.2); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 0.3; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .hero-heading { font-size: 3rem; }
+      .section-title { font-size: 2.5rem; }
+      .shield-icon { width: 250px; height: 250px; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .hero-heading { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+      .shield-icon { width: 200px; height: 200px; margin-top: 30px; }
+      .service-card { margin-bottom: 20px; }
+    }
+
+    @media (max-width: 576px) {
+      .hero-heading { font-size: 2rem; }
+      .hero-subtext { font-size: 1rem; }
+      .section-title { font-size: 1.8rem; }
+      .contact-wrapper { padding: 30px 20px; }
+    }
+
+    /* Service Card Animation (if not using AOS) */
+    .service-item {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.8s ease;
+    }
+    
+    .service-item.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#home">FlipZero</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Section Transition Effect -->
+  <div class="section-transition"></div>
+
+  <!-- Digital Rain Animation -->
+  <div class="digital-rain"></div>
+
+  <!-- Home Section -->
+  <section id="home">
+    <div class="circuit-lines"></div>
+    <!-- Network Lines -->
+    <div class="network-line" style="width: 200px; top: 20%; left: 10%; transform: rotate(30deg);"></div>
+    <div class="network-line" style="width: 150px; bottom: 30%; right: 15%; transform: rotate(-45deg);"></div>
+    <div class="network-line" style="width: 120px; top: 70%; left: 20%; transform: rotate(-20deg);"></div>
+    <!-- Cyber Spheres -->
+    <div class="cyber-sphere" style="width: 300px; height: 300px; top: 10%; left: -150px;"></div>
+    <div class="cyber-sphere" style="width: 200px; height: 200px; bottom: 20%; right: -100px;"></div>
+    <!-- Floating Particles -->
+    <div class="floating-particle" style="top: 20%; left: 30%;"></div>
+    <div class="floating-particle" style="top: 60%; left: 70%;"></div>
+    <div class="floating-particle" style="top: 80%; left: 20%;"></div>
+    <div class="floating-particle" style="top: 40%; left: 80%;"></div>
+    <div class="floating-particle" style="top: 30%; left: 50%;"></div>
+    <!-- Binary Streams -->
+    <div class="binary-stream" style="top: 10%; left: 10%;">10101011001010110010101100101</div>
+    <div class="binary-stream" style="top: 40%; right: 5%;">01011001010110010101100101011</div>
+    <!-- Animated Lock Icons -->
+    <div class="animated-lock" style="top: 20%; right: 10%;">
+      <i class="fas fa-lock"></i>
+    </div>
+    <div class="animated-lock" style="top: 70%; left: 10%;">
+      <i class="fas fa-shield-alt"></i>
+    </div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 home-content">
+          <h1 class="hero-heading">WELCOME TO FLIPZERO</h1>
+          <p class="hero-subtext">
+            Next-generation cybersecurity solutions for small and midsize businesses. 
+            Enterprise-grade protection without the enterprise price tag.
+          </p>
+          <a href="#services" class="btn hero-btn">Explore Services</a>
+        </div>
+        <div class="col-lg-5">
+          <div class="shield-icon">
+            <div class="shield-outer">
+              <div class="shield-inner">
+                <div class="shield-center">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="circuit-lines"></div>
+    <!-- Cyber Elements -->
+    <div class="cyber-sphere" style="width: 400px; height: 400px; bottom: -200px; left: -100px;"></div>
+    <div class="cyber-sphere" style="width: 200px; height: 200px; top: 10%; right: -50px;"></div>
+    <!-- Binary Streams -->
+    <div class="binary-stream" style="top: 20%; right: 20%;">01000110 01001100 01001001 01010000</div>
+    <!-- Animated Lock Icons -->
+    <div class="animated-lock" style="top: 30%; right: 20%;">
+      <i class="fas fa-lock"></i>
+    </div>
+    <!-- Network Lines -->
+    <div class="network-line" style="width: 180px; top: 40%; right: 10%; transform: rotate(-60deg);"></div>
+    <div class="network-line" style="width: 150px; bottom: 20%; left: 15%; transform: rotate(30deg);"></div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+          <h2>ABOUT FLIPZERO</h2>
+          <p>
+            FlipZero firmly believes that all business security risks should be assessed and addressed. 
+            Small & Midsize businesses forgo proper security measures due to the exuberant costs being 
+            placed on security and risk services. FlipZero focuses on assisting these organizations.
+          </p>
+          <p class="about-text" data-aos="fade-up" data-aos-delay="300">
+            No one should go without proper security because of incredible costs or lack of knowledge. 
+            Small & Midsize businesses requires data security, monitoring, auditing, and protection of 
+            enterprise data to help ensure compliance.
+          </p>
+          <p class="about-text" data-aos="fade-up" data-aos-delay="400">
+            Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses 
+            need to safeguard diverse data types such as structured and unstructured, online and offline, 
+            and must do so across complex systems including cloud and onsite data environments.
+          </p>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="about-feature">
+                <div class="about-feature-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="about-feature-title">Data Protection</h3>
+                <p>Safeguarding diverse data types across complex systems including cloud and onsite environments.</p>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="about-feature">
+                <div class="about-feature-icon">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <h3 class="about-feature-title">Breach Prevention</h3>
+                <p>Protection against data breaches and ransomware attacks with comprehensive security measures.</p>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
+              <div class="about-feature">
+                <div class="about-feature-icon">
+                  <i class="fas fa-search"></i>
+                </div>
+                <h3 class="about-feature-title">Compliance</h3>
+                <p>Ensuring your business meets all necessary security compliance requirements and standards.</p>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="700">
+              <div class="about-feature">
+                <div class="about-feature-icon">
+                  <i class="fas fa-user-shield"></i>
+                </div>
+                <h3 class="about-feature-title">Monitoring</h3>
+                <p>Continuous monitoring of systems to detect and respond to potential security threats.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="circuit-lines"></div>
+    <!-- Cyber Elements -->
+    <div class="cyber-sphere" style="width: 350px; height: 350px; top: -100px; right: -150px;"></div>
+    <div class="cyber-sphere" style="width: 250px; height: 250px; bottom: 10%; left: -100px;"></div>
+    <!-- Floating Particles -->
+    <div class="floating-particle" style="top: 30%; left: 10%;"></div>
+    <div class="floating-particle" style="top: 70%; left: 85%;"></div>
+    <div class="floating-particle" style="top: 85%; left: 45%;"></div>
+    <!-- Animated Lock Icons -->
+    <div class="animated-lock" style="top: 15%; left: 20%;">
+      <i class="fas fa-database"></i>
+    </div>
+    <div class="animated-lock" style="bottom: 15%; right: 20%;">
+      <i class="fas fa-network-wired"></i>
+    </div>
+    <!-- Network Lines -->
+    <div class="network-line" style="width: 220px; top: 30%; left: 5%; transform: rotate(15deg);"></div>
+    <div class="container">
+      <div class="services-intro">
+        <h2>WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS</h2>
+        <h3>SECURITY SERVICES</h3>
+      </div>
+      <div class="row g-4">
+        <!-- Service Cards -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-search"></i></div>
+            <h3 class="service-title">Data Discovery &amp; Classification</h3>
+            <p class="service-description">Identify and classify your business data to ensure proper security measures.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-lock"></i></div>
+            <h3 class="service-title">Data Redaction &amp; Encryption</h3>
+            <p class="service-description">Secure your sensitive data with advanced encryption and redaction techniques.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-eye-slash"></i></div>
+            <h3 class="service-title">Data Masking</h3>
+            <p class="service-description">Implement static and dynamic data masking to protect confidential information.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+            <h3 class="service-title">Data Activity Monitoring</h3>
+            <p class="service-description">Continuously monitor data access and activity to detect anomalies.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3 class="service-title">Threat Assessments &amp; Risk Analysis</h3>
+            <p class="service-description">Conduct comprehensive threat assessments to analyze and mitigate risks.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 class="service-title">Vulnerability Assessment</h3>
+            <p class="service-description">Identify and remediate vulnerabilities in your systems.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="700">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+            <h3 class="service-title">Cybersecurity Training</h3>
+            <p class="service-description">Enhance your team’s awareness with targeted cybersecurity training.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="800">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+            <h3 class="service-title">Penetration Testing</h3>
+            <p class="service-description">Simulate attacks to evaluate your network’s security posture.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="900">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-user-secret"></i></div>
+            <h3 class="service-title">Phishing Testing</h3>
+            <p class="service-description">Assess your vulnerability to phishing attacks with simulated campaigns.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="1000">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-bell"></i></div>
+            <h3 class="service-title">Intrusion Detection</h3>
+            <p class="service-description">Implement systems to detect and prevent unauthorized intrusions.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="1100">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-envelope-open-text"></i></div>
+            <h3 class="service-title">Email Security</h3>
+            <p class="service-description">Secure your email systems against spam and malicious attacks.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="1200">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-cogs"></i></div>
+            <h3 class="service-title">System Maintenance</h3>
+            <p class="service-description">Installation, configuration, testing, maintenance and monitoring of hardware and software tools.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="contact-wrapper text-center">
+            <div class="contact-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h2 class="contact-heading">WE WILL RESPOND WITHIN 48 HRS</h2>
+            <p class="contact-subheading">We are ready to answer any of your security concerns</p>
+            <a href="mailto:info@flipzero.net" class="contact-email">info@flipzero.net</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-text">&copy; 2025 FlipZero. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Initialize AOS with animations repeating on every scroll
+    AOS.init({
+      once: false
+    });
+
+    // Intersection Observer to update active nav-link based on visible section
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observerOptions = {
+      threshold: 0.6
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href').substring(1) === entry.target.getAttribute('id')){
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+
+    // Collapse navbar on mobile when a nav-link is clicked
+    const navLinkElements = document.querySelectorAll('.nav-link');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    navLinkElements.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navbarCollapse.classList.contains('show')) {
+          new bootstrap.Collapse(navbarCollapse, {
+            toggle: true
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
