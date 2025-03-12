@@ -20,6 +20,8 @@
             --dark: #102027;       /* Dark blue-gray */
             --cyber-green: #d7d7d7; /* Cybersecurity green */
             --cyber-red: #ff3d71;  /* Alert red */
+            --gradient-primary: linear-gradient(to right, #2962FF, #00D4FF);
+            
         }
         
         body {
@@ -627,10 +629,94 @@
             0% { transform: translateY(-100%); }
             100% { transform: translateY(100vh); }
         }
+
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.3;
+            pointer-events: none;
+            background-color: rgba(0, 0, 0, 0.8); /* Light background to test */
+        }
+
+        .binary-drop {
+            position: absolute;
+            color: var(--secondary);
+            font-family: monospace;
+            font-size: 14px;
+            animation: rain linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes rain {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px));
+            }
+        }
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .contact-icon {
+          font-size: 4rem;
+          color: var(--accent-color);
+          margin-bottom: 20px;
+        }
+
+        .contact-subheading {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.8;
+    }
+
+    .contact-info {
+      margin-bottom: 20px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: rgb(0, 0, 0);
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 500;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .contact-email:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-icon {
+      font-size: 4rem;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+
+
     </style>
 </head>
 <body>
+    <canvas class="matrix-rain"></canvas>
     <!-- Navigation -->
+<header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#home">FLIPZERO</span></a>
@@ -639,6 +725,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
@@ -652,13 +741,16 @@
             </div>
         </div>
     </nav>
-
+</header>
+    <!-- <div class="binary-rain" id="binaryRain"></div> -->
+<main>
     <!-- Home Section -->
     <section id="home">
         <!-- Cybersecurity background elements -->
-        <div class="cyber-grid"></div>
+        <!-- <div class="cyber-grid"></div> -->
         <div class="matrix-bg" id="matrix-bg"></div>
         <div class="cyber-sphere"></div>
+        <!-- <div class="binary-rain" id="binaryRain"></div> -->
         
         <!-- Data nodes -->
         <div class="data-node" style="top: 30%; left: 20%;"></div>
@@ -690,7 +782,7 @@
                     
                     <div data-aos="fade-up" data-aos-delay="600">
                         <a href="#about" class="btn btn-primary me-3">Learn More</a>
-                        <a href="#services" class="btn btn-outline-light">Our Services</a>
+                        <a href="#services" class="btn btn-primary me-3">Our Services</a>
                     </div>
                 </div>
             </div>
@@ -700,13 +792,15 @@
     <!-- About Section -->
     <section id="about">
         <!-- Cyber elements -->
+        <!-- <div class="binary-rain" id="binaryRain"></div> -->
+
         <i class="fas fa-code binary-stream" style="top: 15%; left: 5%;">01001100 01110011 01100101 01100011</i>
         <i class="fas fa-shield-alt shield-icon" style="bottom: 15%; right: 10%;"></i>
         <div class="cyber-circle" style="width: 300px; height: 300px; top: 10%; right: 5%;"></div>
         <div class="cyber-circle" style="width: 200px; height: 200px; bottom: 10%; left: 5%;"></div>
         
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">ABOUT <span class="text-accent">FLIPZERO</span></h2>
+            <h2 class="section-title" data-aos="fade-up">ABOUT <span>FLIPZERO</span></h2>
             
             <div class="row content-left align-items-center">
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
@@ -718,12 +812,21 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
                     <div class="img-placeholder img-cyber">
-                        <i class="fas fa-shield-alt" style="font-size: 80px; color: var(--cyber-green); opacity: 0.2;"></i>
+                        <div class="shield-icon">
+                            <div class="shield-outer">
+                              <div class="shield-inner">
+                                <div class="shield-center">
+                                  <i class="fas fa-shield-alt"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- <i class="fas fa-shield-alt" style="font-size: 80px; color: var(--cyber-green); opacity: 0.2;"></i>
                         <div class="circuit-border"></div>
                         <div class="circuit-line" style="width: 50px; height: 2px; top: 20%; left: 0;"></div>
                         <div class="circuit-line" style="width: 2px; height: 50px; top: 0; right: 30%;"></div>
                         <div class="circuit-line" style="width: 50px; height: 2px; bottom: 30%; right: 0;"></div>
-                        <div class="circuit-line" style="width: 2px; height: 40px; bottom: 0; left: 40%;"></div>
+                        <div class="circuit-line" style="width: 2px; height: 40px; bottom: 0; left: 40%;"></div> -->
                     </div>
                 </div>
             </div>
@@ -738,7 +841,7 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="300">
                     <div class="img-placeholder">
-                        <span>Image Placeholder</span>
+                        <!-- <span>Image Placeholder</span> -->
                     </div>
                 </div>
             </div>
@@ -818,40 +921,24 @@
     <section id="contact">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">CONTACT US</h2>
-            <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">WE WILL RESPOND WITHIN 48 HRS</p>
             
             <div class="row justify-content-center">
-                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-                    <div class="contact-form">
-                        <p class="text-center mb-4">We are ready to answer any of your security concerns.<br>Please contact us via email <a href="mailto:info@flipzero.net">info@flipzero.net</a></p>
-                        
-                        <form>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="subject" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="subject" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" rows="5" required></textarea>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Send Message</button>
-                            </div>
-                        </form>
+                <div class="contact-wrapper text-center">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-form justify-content-center">                        
+                          <span class="contact-icon">
+                            <i class="fas fa-headset"></i>
+                          </span>
+                          <h4 class="contact-heading">We are ready to answer any of your security concerns</h4>
+                          <p class="contact-subheading">WE WILL RESPOND WITHIN 48 HRS</p>
+                          <a href="mailto:info@flipzero.net" class="contact-email">info@flipzero.net</a>
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </section>
-
+</main>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -936,6 +1023,106 @@
                 }
             });
         });
+
+
+// Binary rain animation across full document height
+function createBinaryRain() {
+    const binaryRain = document.getElementById('binaryRain');
+    binaryRain.innerHTML = ''; // Clear previous drops to prevent duplicates
+
+    const width = window.innerWidth;
+    const height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+    ); // Get full document height
+
+    console.log("Binary rain generation started, height:", height);
+
+    const dropCount = Math.floor(width / 10); // Control the number of drops
+
+    for (let i = 0; i < dropCount; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'binary-drop';
+        drop.style.left = `${Math.random() * width}px`;
+        drop.style.top = `${Math.random() * height}px`; // Spread drops across the full page
+        drop.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        drop.style.animationDelay = `${Math.random() * 5}s`;
+        drop.innerHTML = Math.random() > 0.5 ? '0' : '1';
+        binaryRain.appendChild(drop);
+    }
+}
+
+// Ensure the animation covers the entire document height
+function updateBinaryRain() {
+    const binaryRain = document.getElementById('binaryRain');
+    binaryRain.style.height = `${Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+    )}px`;
+}
+
+// Create binary rain on load
+window.addEventListener('load', () => {
+    createBinaryRain();
+    updateBinaryRain();
+});
+
+// Recalculate only on **resize**, not on every scroll
+window.addEventListener('resize', () => {
+    updateBinaryRain();
+    createBinaryRain();
+});
+
+
+// Matrix Rain Effect
+const canvas = document.querySelector('.matrix-rain');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+    ); // Full document height
+}
+
+// Initialize on Load
+resizeCanvas();
+
+// Matrix characters
+const characters = '01'.split('');
+const fontSize = 14;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = Array(columns).fill(1);
+
+function drawMatrixRain() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fading effect
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#64ffda'; // Green neon color
+    ctx.font = `${fontSize}px monospace`;
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = characters[Math.floor(Math.random() * characters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Reset drop randomly after reaching bottom
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
+}
+
+// Start animation
+setInterval(drawMatrixRain, 50);
+
+// Resize event to maintain full document height
+window.addEventListener('resize', resizeCanvas);
+
+
+
     </script>
 </body>
 </html>
