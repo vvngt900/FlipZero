@@ -10,22 +10,78 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a237e;    /* Deep blue */
             --secondary: #0d47a1;  /* Medium blue */
             --accent: #2962ff;     /* Bright blue */
             --accent-glow: #00b0ff; /* Glowing blue */
-            --light: #e3f2fd;      /* Light blue */
+            --light: #ffffff;      /* Light blue */
             --dark: #102027;       /* Dark blue-gray */
             --cyber-green: #d7d7d7; /* Cybersecurity green */
             --cyber-red: #ff3d71;  /* Alert red */
-            --gradient-primary: linear-gradient(to right, #2962FF, #00D4FF);
             --gradient-primary: linear-gradient(to right, #2962FF, #00D4FF);
             --gradient-secondary: linear-gradient(to right, #0d47a1, #1a237e);
             --gradient-accent: linear-gradient(to right, #2962ff, #00b0ff);
             --gradient-light-dark: linear-gradient(to right, #e3f2fd, #102027);
         }
+
+        /*Initial termianl style*/
+        /* .terminal-style {
+            background-color: #000000;
+            color: #00FF00; 
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+        } */
+
+        .terminal-style::after {
+            content: ' ';
+            display: inline-block;
+            width: 10px;
+            height: 1em;
+            background-color: #00FF00;
+            margin-left: 5px;
+            vertical-align: bottom;
+            animation: blink 1s step-start infinite;
+        }
+
+        /* @keyframes blink {
+            50% { opacity: 0; }
+        } */
+        /*Initial termianl style*/
+
+        .terminal-style {
+            font-family: 'Inconsolata', monospace;
+            background-color: #000; /* Black background */
+            color: #0f0; /* Green text */
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .typing {
+            overflow: hidden; /* Ensures the text stays within the container */
+            white-space: nowrap; /* Prevents text wrapping */
+            border-right: 0.15em solid #0f0; /* Creates the cursor effect */
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        /* Typing effect */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        /* Blinking cursor */
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #0f0; }
+        }
+
+
 
         #about::after {
             background: linear-gradient(135deg, rgba(13, 71, 161, 0.9), rgba(227, 242, 253, 0.95));
@@ -41,7 +97,7 @@
         
         body {
             font-family: 'Roboto', sans-serif;
-            color: #333;
+            color: #000000;
             overflow-x: hidden;
             background-color: #fafafa;
             position: relative;
@@ -75,8 +131,10 @@
         
         /* Add semi-transparent backgrounds to sections for better readability */
         #home {
-            background: linear-gradient(135deg, rgba(26, 35, 126, 0.85), rgba(13, 71, 161, 0.85));
+            /* background: linear-gradient(135deg, rgba(4, 17, 158, 1), rgba(13, 71, 161, 0.90)); */
+            background: linear-gradient(135deg, var(--dark), var(--primary));
             color: white;
+            position: relative;
         }
         
         #about {
@@ -89,7 +147,6 @@
         
         #contact {
             background: linear-gradient(135deg, rgba(41, 98, 255, 0.9), rgba(26, 35, 126, 0.9));
-            color: white;
         }
         
         .navbar {
@@ -278,7 +335,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 3px;
-            background-color: var(--accent);
+            background-color: var(--light);
             box-shadow: 0 0 10px var(--accent-glow);
         }
         
@@ -376,7 +433,8 @@
             color: rgba(0, 255, 204, 0.15);
             white-space: nowrap;
             font-size: 14px;
-            animation: binary-float 20s infinite linear;
+            opacity: 0.5;
+            /* animation: binary-float 30s infinite linear; */
             z-index: 1;
         }
         
@@ -392,11 +450,29 @@
         
         .shield-icon {
             position: absolute;
-            color: var(--accent-glow);
-            font-size: 60px;
-            opacity: 0.1;
+            color: black;
+            font-size: 200px;
+            opacity: 1;
             animation: pulse 8s infinite ease-in-out;
-            z-index: 1;
+            z-index: 10;
+        }
+
+        .network-icon{
+            position: absolute;
+            color: var(--dark);
+            font-size: 200px;
+            opacity: 0.5;
+            animation: rotate 8s infinite linear;
+            z-index: 10;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
         
         .img-cyber {
@@ -653,7 +729,7 @@
 </head>
 <body>
     <!-- Matrix Rain Canvas - Fixed as background -->
-    <canvas class="matrix-rain"></canvas>
+    <!-- <canvas class="matrix-rain"></canvas> -->
     
     <!-- Navigation -->
     <header>
@@ -687,26 +763,42 @@
         <!-- Home Section -->
         <section class="section-first" id="home">
             <div class="cyber-sphere"></div>
-            
-            <!-- Data nodes -->
-            <div class="data-node" style="top: 30%; left: 20%;"></div>
-            <div class="data-node" style="top: 70%; left: 80%;"></div>
-            <div class="data-node" style="top: 40%; left: 90%;"></div>
-            <div class="data-node" style="top: 80%; left: 30%;"></div>
-            <div class="data-node" style="top: 20%; left: 60%;"></div>
+            <div class="cyber-grid"></div>
+
+        <!-- Data nodes -->
+        <div class="data-node lock-icon" style="top: 30%; left: 20%;"></div>
+        <div class="data-node lock-icon" style="top: 70%; left: 80%;"></div>
+        <div class="data-node lock-icon" style="top: 40%; left: 90%;"></div>
+        <div class="data-node lock-icon" style="top: 80%; left: 30%;"></div>
+        <div class="data-node lock-icon" style="top: 20%; left: 60%;"></div>
+        
+        <!-- Binary streams -->
+        <div class="binary-stream" id="typing-text" style="top: 15%; left: 5%;">01001100 01110011 01100101 01100011 01010101</div>
+        <div class="binary-stream" id="typing-text" style="top: 60%; left: 80%;">01110011 01100101 01100011 01010101 01010010</div>
+        <div class="binary-stream" id="typing-text" style="top: 85%; left: 20%;">01010010 01001001 01010100 01011001 00100000</div>
+
+        <!-- Floating icons -->
+        <i class="fas fa-lock lock-icon" style="top: 25%; left: 15%;"></i>
+        <i class="fas fa-shield-alt lock-icon" style="top: 45%; left: 85%;"></i>
+        <i class="fas fa-key lock-icon" style="top: 75%; left: 35%;"></i>
             
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-10 hero-text" data-aos="fade-up" data-aos-duration="1000">
                         <h1 class="mb-4">WELCOME TO <span class="glitch" data-text="FLIPZERO">FLIPZERO</span></h1>
                         
+                        <!-- <p  class="terminal-style typing" id="typing-text"> <i class="fas fa-terminal"></i> :: Securing small & midsize businesses in the digital age</p> -->
+                         <!--Edit Homepage content-->
                         <p class="lead mb-4 typing" id="typing-text">Securing small & midsize businesses in the digital age</p>
-                        
-                        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="400">We focus on providing an in-depth approach to avoiding security incidents</p>
+                        <!--Edit Home page content-->
+                        <!-- <p class="terminal-style typing" id="typing-text" style="margin-top: 30px;">
+                            Securing small & midsize businesses in the digital age <br/>
                             We focus on providing an in-depth approach to avoiding security incidents
-                        </p>
+                        </p> -->
                         
-                        <div data-aos="fade-up" data-aos-delay="600">
+                        
+                        <div class="justify-content" data-aos="fade-up" data-aos-delay="600">
                             <a href="#about" class="btn btn-primary me-3">Learn More</a>
                             <a href="#services" class="btn btn-primary me-3">Our Services</a>
                         </div>
@@ -717,7 +809,7 @@
 
         <!-- About Section -->
         <section id="about">
-            <i class="fas fa-shield-alt shield-icon" style="bottom: 15%; right: 10%;"></i>
+            <!-- <i class="fas fa-shield-alt shield-icon" style="bottom: 15%; right: 10%;"></i> -->
             <div class="cyber-circle" style="width: 300px; height: 300px; top: 10%; right: 5%;"></div>
             <div class="cyber-circle" style="width: 200px; height: 200px; bottom: 10%; left: 5%;"></div>
             
@@ -727,6 +819,7 @@
                 <div class="row content-left align-items-center">
                     <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                         <div class="about-content">
+                            <!--Edit About page content-->
                             <h3 class="mb-3 cyber-text">Security For Everyone</h3>
                             <p>FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services.</p>
                             <p>FlipZero focuses on assisting these organizations. No one should go without proper security because of incredible costs or lack of knowledge.</p>
@@ -750,14 +843,23 @@
                 <div class="row content-right align-items-center mt-5">
                     <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
                         <div class="about-content">
+                            <!--Edit About page content-->
                             <h3 class="mb-3 cyber-text">Protecting Your Business</h3>
                             <p>Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.</p>
                             <p>Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses need to safeguard diverse data types such as structured and unstructured, online and offline, and must do so across complex systems including cloud and onsite data environments.</p>
                         </div>
                     </div>
                     <div class="col-lg-6" data-aos="fade-right" data-aos-delay="300">
-                        <div class="img-placeholder">
-                            <!-- Placeholder for image -->
+                        <div class="img-placeholder img-cyber">
+                            <div class="network-icon">
+                                <div class="shield-outer">
+                                    <div class="shield-inner">
+                                        <div class="shield-center">
+                                            <i class="fab fa-react"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -767,6 +869,7 @@
         <!-- Services Section -->
         <section id="services">
             <div class="container">
+                <!--Edit Services page content-->
                 <h2 class="section-title" data-aos="fade-up">OUR SERVICES</h2>
                 <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS</p>
                 
@@ -836,9 +939,10 @@
         <!-- Contact Section -->
         <section id="contact">
             <div class="container">
+                <!--Edit Contact page content-->
                 <h2 class="section-title" data-aos="fade-up">CONTACT US</h2>
                 
-                <div class="row justify-content-center">
+                <div class="row">
                     <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
                         <div class="contact-form text-center">                        
                             <span class="contact-icon">
