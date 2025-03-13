@@ -29,6 +29,7 @@
             color: #333;
             overflow-x: hidden;
             background-color: #fafafa;
+            position: relative; /* Important for z-index context */
         }
         
         h1, h2, h3, h4, .navbar-brand, .cyber-text {
@@ -42,6 +43,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            z-index: 1000; /* Ensure navbar is above matrix */
         }
         
         .navbar-brand {
@@ -90,10 +92,11 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            z-index: 1; /* Ensure sections are above matrix */
         }
         
         #home {
-            background: linear-gradient(135deg, var(--dark), var(--primary));
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.7), rgba(13, 71, 161, 0.7));
             color: white;
             position: relative;
         }
@@ -139,16 +142,20 @@
         }
         
         #about {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: relative;
         }
         
         .about-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 5;
         }
         
         #services {
-            background-color: var(--light);
+            background-color: rgba(227, 242, 253, 0.8);
+            position: relative;
         }
         
         .service-item {
@@ -161,6 +168,7 @@
             transition: all 0.3s ease;
             overflow: hidden;
             position: relative;
+            z-index: 5;
         }
         
         .service-item:before {
@@ -196,8 +204,9 @@
         }
         
         #contact {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.7), rgba(26, 35, 126, 0.7));
             color: white;
+            position: relative;
         }
         
         .contact-form {
@@ -208,6 +217,7 @@
             color: #333;
             position: relative;
             overflow: hidden;
+            z-index: 5;
         }
         
         .contact-form:before {
@@ -223,11 +233,12 @@
         }
         
         .footer {
-            background-color: var(--dark);
+            background-color: rgba(16, 32, 39, 0.9);
             color: white;
             padding: 2rem 0;
             text-align: center;
             position: relative;
+            z-index: 5;
             overflow: hidden;
         }
         
@@ -237,6 +248,7 @@
             font-weight: 700;
             text-align: center;
             letter-spacing: 1px;
+            z-index: 5;
         }
         
         .section-title:after {
@@ -269,6 +281,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             font-size: 0.9rem;
+            z-index: 5;
         }
         
         .btn-primary:before {
@@ -337,6 +350,7 @@
             border-radius: 50%;
             opacity: 0.2;
             animation: pulse 4s infinite ease-in-out;
+            z-index: 2;
         }
         
         .binary-stream {
@@ -346,7 +360,7 @@
             white-space: nowrap;
             font-size: 14px;
             animation: binary-float 20s infinite linear;
-            z-index: 1;
+            z-index: 2;
         }
         
         .lock-icon {
@@ -356,7 +370,7 @@
             opacity: 0.1;
             animation: float-rotate 15s infinite ease-in-out;
             transform-origin: center;
-            z-index: 1;
+            z-index: 2;
         }
         
         .shield-icon {
@@ -365,7 +379,7 @@
             font-size: 60px;
             opacity: 0.1;
             animation: pulse 8s infinite ease-in-out;
-            z-index: 1;
+            z-index: 2;
         }
         
         .img-cyber {
@@ -373,6 +387,7 @@
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            z-index: 5;
         }
         
         .img-placeholder {
@@ -386,6 +401,7 @@
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0, 255, 204, 0.2);
+            z-index: 5;
         }
         
         .img-placeholder:before {
@@ -430,7 +446,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 1;
+            z-index: 2;
         }
         
         .cyber-sphere:before, .cyber-sphere:after {
@@ -604,42 +620,22 @@
             50% { border-color: var(--cyber-green); }
         }
         
-        /* Matrix rain effect */
-        .matrix-bg {
-            position: absolute;
+        /* Matrix rain effect - FIXED */
+        .matrix-rain {
+            position: fixed; /* Fixed position to cover entire viewport */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            opacity: 0.05;
-        }
-        
-        .matrix-column {
-            position: absolute;
-            top: 0;
-            font-family: monospace;
-            color: var(--cyber-green);
-            font-size: 1.2rem;
-            animation: matrix-rain linear infinite;
-        }
-        
-        @keyframes matrix-rain {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
+            z-index: 0; /* Set to lowest z-index to be behind all elements */
+            opacity: 0.5; /* Slightly increased opacity for better visibility */
+            pointer-events: none; /* Allows clicking through the canvas */
         }
 
-        /* Matrix Rain Effect */
-        .matrix-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.1;
-            pointer-events: none;
+        /* Content containers need higher z-index */
+        .container {
+            position: relative;
+            z-index: 5; /* Ensure content is above matrix */
         }
 
         .contact-icon {
@@ -649,267 +645,264 @@
         }
 
         .contact-subheading {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      opacity: 0.8;
-    }
+          font-size: 1.2rem;
+          margin-bottom: 30px;
+          opacity: 0.8;
+        }
 
-    .contact-info {
-      margin-bottom: 20px;
-    }
+        .contact-info {
+          margin-bottom: 20px;
+        }
 
-    .contact-email {
-      display: inline-block;
-      background: var(--gradient-primary);
-      color: rgb(0, 0, 0);
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-weight: 500;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
+        .contact-email {
+          display: inline-block;
+          background: var(--gradient-primary);
+          color: rgb(0, 0, 0);
+          padding: 12px 30px;
+          border-radius: 30px;
+          font-weight: 500;
+          margin-top: 10px;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          position: relative;
+          z-index: 5;
+        }
 
-    .contact-email:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
+        .contact-email:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .contact-icon {
-      font-size: 4rem;
-      color: var(--accent-color);
-      margin-bottom: 20px;
-    }
+        .contact-icon {
+          font-size: 4rem;
+          color: var(--accent-color);
+          margin-bottom: 20px;
+        }
 
-
+        /* Make sure all text content is above matrix */
+        p, h1, h2, h3, h4, h5, h6, ul, li, a {
+            position: relative;
+            z-index: 5;
+        }
     </style>
 </head>
 <body>
+    <!-- Matrix Rain Canvas - Now fixed position to cover entire page -->
     <canvas class="matrix-rain"></canvas>
+    
     <!-- Navigation -->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#home">FLIPZERO</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-    <!-- <div class="binary-rain" id="binaryRain"></div> -->
-<main>
-    <!-- Home Section -->
-    <section id="home">
-        <!-- Cybersecurity background elements -->
-        <!-- <div class="cyber-grid"></div> -->
-        <div class="matrix-bg" id="matrix-bg"></div>
-        <div class="cyber-sphere"></div>
-        <!-- <div class="binary-rain" id="binaryRain"></div> -->
-        
-        <!-- Data nodes -->
-        <div class="data-node" style="top: 30%; left: 20%;"></div>
-        <div class="data-node" style="top: 70%; left: 80%;"></div>
-        <div class="data-node" style="top: 40%; left: 90%;"></div>
-        <div class="data-node" style="top: 80%; left: 30%;"></div>
-        <div class="data-node" style="top: 20%; left: 60%;"></div>
-        
-        <!-- Binary streams -->
-        <div class="binary-stream" style="top: 10%; left: 5%;">01001100 01110011 01100101 01100011 01010101</div>
-        <div class="binary-stream" style="top: 30%; left: 80%;">01110011 01100101 01100011 01010101 01010010</div>
-        <div class="binary-stream" style="top: 70%; left: 20%;">01010010 01001001 01010100 01011001 00100000</div>
-        
-        <!-- Floating icons -->
-        <i class="fas fa-lock lock-icon" style="top: 25%; left: 15%;"></i>
-        <i class="fas fa-shield-alt shield-icon" style="top: 65%; left: 85%;"></i>
-        <i class="fas fa-key lock-icon" style="top: 75%; left: 35%;"></i>
-        
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10 hero-text" data-aos="fade-up" data-aos-duration="1000">
-                    <h1 class="mb-4">WELCOME TO <span class="glitch" data-text="FLIPZERO">FLIPZERO</span></h1>
-                    
-                    <p class="lead mb-4 typing" id="typing-text">Securing small & midsize businesses in the digital age</p>
-                    
-                    <p class="lead mb-5" data-aos="fade-up" data-aos-delay="400">
-                        We focus on providing an in-depth approach to avoiding security incidents
-                    </p>
-                    
-                    <div data-aos="fade-up" data-aos-delay="600">
-                        <a href="#about" class="btn btn-primary me-3">Learn More</a>
-                        <a href="#services" class="btn btn-primary me-3">Our Services</a>
-                    </div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#home">FLIPZERO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Home Section -->
-    <!-- About Section -->
-    <section id="about">
-        <!-- Cyber elements -->
-        <!-- <div class="binary-rain" id="binaryRain"></div> -->
+        </nav>
+    </header>
 
-        <i class="fas fa-code binary-stream" style="top: 15%; left: 5%;">01001100 01110011 01100101 01100011</i>
-        <i class="fas fa-shield-alt shield-icon" style="bottom: 15%; right: 10%;"></i>
-        <div class="cyber-circle" style="width: 300px; height: 300px; top: 10%; right: 5%;"></div>
-        <div class="cyber-circle" style="width: 200px; height: 200px; bottom: 10%; left: 5%;"></div>
-        
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">ABOUT <span>FLIPZERO</span></h2>
+    <main>
+        <!-- Home Section -->
+        <section id="home">
+            <!-- Cybersecurity background elements -->
+            <div class="cyber-sphere"></div>
             
-            <div class="row content-left align-items-center">
-                <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-                    <div class="about-content">
-                        <h3 class="mb-3 cyber-text">Security For Everyone</h3>
-                        <p>FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services.</p>
-                        <p>FlipZero focuses on assisting these organizations. No one should go without proper security because of incredible costs or lack of knowledge.</p>
+            <!-- Data nodes -->
+            <div class="data-node" style="top: 30%; left: 20%;"></div>
+            <div class="data-node" style="top: 70%; left: 80%;"></div>
+            <div class="data-node" style="top: 40%; left: 90%;"></div>
+            <div class="data-node" style="top: 80%; left: 30%;"></div>
+            <div class="data-node" style="top: 20%; left: 60%;"></div>
+            
+            <!-- Binary streams -->
+            <div class="binary-stream" style="top: 10%; left: 5%;">01001100 01110011 01100101 01100011 01010101</div>
+            <div class="binary-stream" style="top: 30%; left: 80%;">01110011 01100101 01100011 01010101 01010010</div>
+            <div class="binary-stream" style="top: 70%; left: 20%;">01010010 01001001 01010100 01011001 00100000</div>
+            
+            <!-- Floating icons -->
+            <i class="fas fa-lock lock-icon" style="top: 25%; left: 15%;"></i>
+            <i class="fas fa-shield-alt shield-icon" style="top: 65%; left: 85%;"></i>
+            <i class="fas fa-key lock-icon" style="top: 75%; left: 35%;"></i>
+            
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 hero-text" data-aos="fade-up" data-aos-duration="1000">
+                        <h1 class="mb-4">WELCOME TO <span class="glitch" data-text="FLIPZERO">FLIPZERO</span></h1>
+                        
+                        <p class="lead mb-4 typing" id="typing-text">Securing small & midsize businesses in the digital age</p>
+                        
+                        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="400">
+                            We focus on providing an in-depth approach to avoiding security incidents
+                        </p>
+                        
+                        <div data-aos="fade-up" data-aos-delay="600">
+                            <a href="#about" class="btn btn-primary me-3">Learn More</a>
+                            <a href="#services" class="btn btn-primary me-3">Our Services</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-                    <div class="img-placeholder img-cyber">
-                        <div class="shield-icon">
-                            <div class="shield-outer">
-                              <div class="shield-inner">
-                                <div class="shield-center">
-                                  <i class="fas fa-shield-alt"></i>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about">
+            <!-- Cyber elements -->
+            <i class="fas fa-code binary-stream" style="top: 15%; left: 5%;">01001100 01110011 01100101 01100011</i>
+            <i class="fas fa-shield-alt shield-icon" style="bottom: 15%; right: 10%;"></i>
+            <div class="cyber-circle" style="width: 300px; height: 300px; top: 10%; right: 5%;"></div>
+            <div class="cyber-circle" style="width: 200px; height: 200px; bottom: 10%; left: 5%;"></div>
+            
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">ABOUT <span>FLIPZERO</span></h2>
+                
+                <div class="row content-left align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+                        <div class="about-content">
+                            <h3 class="mb-3 cyber-text">Security For Everyone</h3>
+                            <p>FlipZero firmly believes that all business security risks should be assessed and addressed. Small & Midsize businesses forgo proper security measures due to the exuberant costs being placed on security and risk services.</p>
+                            <p>FlipZero focuses on assisting these organizations. No one should go without proper security because of incredible costs or lack of knowledge.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+                        <div class="img-placeholder img-cyber">
+                            <div class="shield-icon">
+                                <div class="shield-outer">
+                                  <div class="shield-inner">
+                                    <div class="shield-center">
+                                      <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row content-right align-items-center mt-5">
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+                        <div class="about-content">
+                            <h3 class="mb-3 cyber-text">Protecting Your Business</h3>
+                            <p>Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.</p>
+                            <p>Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses need to safeguard diverse data types such as structured and unstructured, online and offline, and must do so across complex systems including cloud and onsite data environments.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="300">
+                        <div class="img-placeholder">
+                            <!-- <span>Image Placeholder</span> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">OUR SERVICES</h2>
+                <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS</p>
+                
+                <div class="row">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-shield-alt"></i>
                             </div>
-                          </div>
-                        <!-- <i class="fas fa-shield-alt" style="font-size: 80px; color: var(--cyber-green); opacity: 0.2;"></i>
-                        <div class="circuit-border"></div>
-                        <div class="circuit-line" style="width: 50px; height: 2px; top: 20%; left: 0;"></div>
-                        <div class="circuit-line" style="width: 2px; height: 50px; top: 0; right: 30%;"></div>
-                        <div class="circuit-line" style="width: 50px; height: 2px; bottom: 30%; right: 0;"></div>
-                        <div class="circuit-line" style="width: 2px; height: 40px; bottom: 0; left: 40%;"></div> -->
+                            <h4>Data Security</h4>
+                            <ul class="list-unstyled">
+                                <li>Data discovery and classification</li>
+                                <li>Data redaction, data encryption</li>
+                                <li>Static and dynamic data masking</li>
+                                <li>Data activity monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h4>Risk Assessment</h4>
+                            <ul class="list-unstyled">
+                                <li>Comprehensive threat assessments</li>
+                                <li>Risk analysis</li>
+                                <li>Vulnerability assessment</li>
+                                <li>Cybersecurity awareness training</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h4>Penetration Testing</h4>
+                            <ul class="list-unstyled">
+                                <li>Network penetration testing</li>
+                                <li>Phishing penetration testing</li>
+                                <li>Intrusion detection & prevention services</li>
+                                <li>Securing of email systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mx-auto mt-4" data-aos="fade-up" data-aos-delay="800">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h4>Implementation</h4>
+                            <ul class="list-unstyled">
+                                <li>Installation, configuration, testing</li>
+                                <li>Maintenance and monitoring</li>
+                                <li>Software and hardware tools</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="row content-right align-items-center mt-5">
-                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-                    <div class="about-content">
-                        <h3 class="mb-3 cyber-text">Protecting Your Business</h3>
-                        <p>Small & Midsize businesses requires data security, monitoring, auditing, and protection of enterprise data to help ensure compliance.</p>
-                        <p>Small & Midsize businesses are faced with data breaches, ransomware attacks. SMB Businesses need to safeguard diverse data types such as structured and unstructured, online and offline, and must do so across complex systems including cloud and onsite data environments.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-right" data-aos-delay="300">
-                    <div class="img-placeholder">
-                        <!-- <span>Image Placeholder</span> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">OUR SERVICES</h2>
-            <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">WE FOCUS ON PROVIDING SMALL & MIDSIZE BUSINESSES AN IN-DEPTH APPROACH TO AVOIDING SECURITY INCIDENTS</p>
-            
-            <div class="row">
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">CONTACT US</h2>
+                
+                <div class="row justify-content-center">
+                    <div class="contact-wrapper text-center">
+                    <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+                        <div class="contact-form justify-content-center">                        
+                              <span class="contact-icon">
+                                <i class="fas fa-headset"></i>
+                              </span>
+                              <h4 class="contact-heading">We are ready to answer any of your security concerns</h4>
+                              <p class="contact-subheading">WE WILL RESPOND WITHIN 48 HRS</p>
+                              <a href="mailto:info@flipzero.net" class="contact-email">info@flipzero.net</a>
                         </div>
-                        <h4>Data Security</h4>
-                        <ul class="list-unstyled">
-                            <li>Data discovery and classification</li>
-                            <li>Data redaction, data encryption</li>
-                            <li>Static and dynamic data masking</li>
-                            <li>Data activity monitoring</li>
-                        </ul>
                     </div>
                 </div>
-                
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h4>Risk Assessment</h4>
-                        <ul class="list-unstyled">
-                            <li>Comprehensive threat assessments</li>
-                            <li>Risk analysis</li>
-                            <li>Vulnerability assessment</li>
-                            <li>Cybersecurity awareness training</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <h4>Penetration Testing</h4>
-                        <ul class="list-unstyled">
-                            <li>Network penetration testing</li>
-                            <li>Phishing penetration testing</li>
-                            <li>Intrusion detection & prevention services</li>
-                            <li>Securing of email systems</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-md-4 mx-auto mt-4" data-aos="fade-up" data-aos-delay="800">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h4>Implementation</h4>
-                        <ul class="list-unstyled">
-                            <li>Installation, configuration, testing</li>
-                            <li>Maintenance and monitoring</li>
-                            <li>Software and hardware tools</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">CONTACT US</h2>
-            
-            <div class="row justify-content-center">
-                <div class="contact-wrapper text-center">
-                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
-                    <div class="contact-form justify-content-center">                        
-                          <span class="contact-icon">
-                            <i class="fas fa-headset"></i>
-                          </span>
-                          <h4 class="contact-heading">We are ready to answer any of your security concerns</h4>
-                          <p class="contact-subheading">WE WILL RESPOND WITHIN 48 HRS</p>
-                          <a href="mailto:info@flipzero.net" class="contact-email">info@flipzero.net</a>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -995,105 +988,82 @@
             });
         });
 
+        // Matrix Rain Effect - IMPROVED VERSION
+        const canvas = document.querySelector('.matrix-rain');
+        const ctx = canvas.getContext('2d');
 
-// Binary rain animation across full document height
-function createBinaryRain() {
-    const binaryRain = document.getElementById('binaryRain');
-    binaryRain.innerHTML = ''; // Clear previous drops to prevent duplicates
-
-    const width = window.innerWidth;
-    const height = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight
-    ); // Get full document height
-
-    console.log("Binary rain generation started, height:", height);
-
-    const dropCount = Math.floor(width / 10); // Control the number of drops
-
-    for (let i = 0; i < dropCount; i++) {
-        const drop = document.createElement('div');
-        drop.className = 'binary-drop';
-        drop.style.left = `${Math.random() * width}px`;
-        drop.style.top = `${Math.random() * height}px`; // Spread drops across the full page
-        drop.style.animationDuration = `${Math.random() * 5 + 5}s`;
-        drop.style.animationDelay = `${Math.random() * 5}s`;
-        drop.innerHTML = Math.random() > 0.5 ? '0' : '1';
-        binaryRain.appendChild(drop);
-    }
-}
-
-// Ensure the animation covers the entire document height
-function updateBinaryRain() {
-    const binaryRain = document.getElementById('binaryRain');
-    binaryRain.style.height = `${Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight
-    )}px`;
-}
-
-// Create binary rain on load
-window.addEventListener('load', () => {
-    createBinaryRain();
-    updateBinaryRain();
-});
-
-// Recalculate only on **resize**, not on every scroll
-window.addEventListener('resize', () => {
-    updateBinaryRain();
-    createBinaryRain();
-});
-
-
-// Matrix Rain Effect
-const canvas = document.querySelector('.matrix-rain');
-const ctx = canvas.getContext('2d');
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight
-    ); // Full document height
-}
-
-// Initialize on Load
-resizeCanvas();
-
-// Matrix characters
-const characters = '01'.split('');
-const fontSize = 14;
-const columns = Math.floor(canvas.width / fontSize);
-const drops = Array(columns).fill(1);
-
-function drawMatrixRain() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fading effect
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = '#64ffda'; // Green neon color
-    ctx.font = `${fontSize}px monospace`;
-
-    for (let i = 0; i < drops.length; i++) {
-        const text = characters[Math.floor(Math.random() * characters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        // Reset drop randomly after reaching bottom
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            // Set canvas height to full document height, not just viewport
+            canvas.height = Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.offsetHeight
+            );
         }
 
-        drops[i]++;
-    }
-}
+        // Initialize on Load
+        window.addEventListener('load', function() {
+            resizeCanvas();
+            startMatrixRain();
+        });
 
-// Start animation
-setInterval(drawMatrixRain, 50);
+        // Matrix characters
+        const characters = '01'.split('');
+        const fontSize = 14;
+        let columns;
+        let drops;
 
-// Resize event to maintain full document height
-window.addEventListener('resize', resizeCanvas);
+        function setupMatrixRain() {
+            columns = Math.floor(canvas.width / fontSize);
+            drops = Array(columns).fill(1);
+        }
 
+        function drawMatrixRain() {
+            // Semi-transparent black to create fade effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Set text color and font
+            ctx.fillStyle = '#64ffda'; // Green neon color
+            ctx.font = `${fontSize}px monospace`;
 
+            for (let i = 0; i < drops.length; i++) {
+                // Random character
+                const text = characters[Math.floor(Math.random() * characters.length)];
+                
+                // Draw the character
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop randomly after reaching bottom
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        function startMatrixRain() {
+            setupMatrixRain();
+            // Start animation
+            setInterval(drawMatrixRain, 50);
+        }
+
+        // Handle resize events
+        window.addEventListener('resize', function() {
+            resizeCanvas();
+            setupMatrixRain();
+        });
+
+        // Recalculate canvas size when document height changes
+        // This ensures matrix covers newly loaded content
+        const resizeObserver = new ResizeObserver(entries => {
+            resizeCanvas();
+        });
+        
+        resizeObserver.observe(document.body);
     </script>
 </body>
 </html>
