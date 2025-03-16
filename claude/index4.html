@@ -22,77 +22,6 @@
             --cyber-green: #d7d7d7; /* Cybersecurity green */
             --cyber-red: #ff3d71;  /* Alert red */
             --gradient-primary: linear-gradient(to right, #2962FF, #00D4FF);
-            --gradient-secondary: linear-gradient(to right, #0d47a1, #1a237e);
-            --gradient-accent: linear-gradient(to right, #2962ff, #00b0ff);
-            --gradient-light-dark: linear-gradient(to right, #e3f2fd, #102027);
-        }
-
-        /*Initial termianl style*/
-        /* .terminal-style {
-            background-color: #000000;
-            color: #00FF00; 
-            font-family: 'Courier New', Courier, monospace;
-            padding: 10px;
-            border-radius: 5px;
-            position: relative;
-        } */
-
-        .terminal-style::after {
-            content: ' ';
-            display: inline-block;
-            width: 10px;
-            height: 1em;
-            background-color: #00FF00;
-            margin-left: 5px;
-            vertical-align: bottom;
-            animation: blink 1s step-start infinite;
-        }
-
-        /* @keyframes blink {
-            50% { opacity: 0; }
-        } */
-        /*Initial termianl style*/
-
-        .terminal-style {
-            font-family: 'Inconsolata', monospace;
-            background-color: #000; /* Black background */
-            color: #0f0; /* Green text */
-            padding: 10px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-
-        .typing {
-            overflow: hidden; /* Ensures the text stays within the container */
-            white-space: nowrap; /* Prevents text wrapping */
-            border-right: 0.15em solid #0f0; /* Creates the cursor effect */
-            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        
-        /* Typing effect */
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
-        /* Blinking cursor */
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #0f0; }
-        }
-
-
-
-        #about::after {
-            background: linear-gradient(135deg, rgba(13, 71, 161, 0.9), rgba(227, 242, 253, 0.95));
-        }
-        
-        #services::before {
-            background: linear-gradient(135deg, rgba(227, 242, 253, 0.95), rgba(41, 98, 255, 0.9));
-        }
-        
-        #contact::before {
-            background: linear-gradient(135deg, rgba(41, 98, 255, 0.9), rgba(26, 35, 126, 0.9));
         }
         
         body {
@@ -108,54 +37,12 @@
             font-weight: 700;
         }
         
-        /* Matrix Rain Canvas - Fixed positioning to cover entire viewport */
-        .matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Place behind all content */
-            pointer-events: none; /* Allow clicks to pass through */
-        }
-        
-        /* Ensure content is readable by adding background to sections */
-        section {
-            position: relative;
-            min-height: 100vh;
-            padding: 6rem 0;
-            display: flex;
-            align-items: center;
-            z-index: 1; /* Above the matrix rain */
-        }
-        
-        /* Add semi-transparent backgrounds to sections for better readability */
-        #home {
-            /* background: linear-gradient(135deg, rgba(4, 17, 158, 1), rgba(13, 71, 161, 0.90)); */
-            background: linear-gradient(135deg, var(--dark), var(--primary));
-            color: white;
-            position: relative;
-        }
-        
-        #about {
-            background: linear-gradient(135deg, rgba(13, 71, 161, 0.9), rgba(227, 242, 253, 0.95));
-        }
-        
-        #services {
-            background: linear-gradient(135deg, rgba(227, 242, 253, 0.95), rgba(41, 98, 255, 0.9));
-        }
-        
-        #contact {
-            background: linear-gradient(135deg, rgba(41, 98, 255, 0.9), rgba(26, 35, 126, 0.9));
-        }
-        
         .navbar {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 1rem 2rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            z-index: 1000; /* Ensure navbar is above matrix */
         }
         
         .navbar-brand {
@@ -196,7 +83,36 @@
             color: white !important;
             transform: translateY(-2px);
         }
+
+        section {
+            min-height: 100vh;
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
         
+        /* Add semi-transparent backgrounds to sections for better readability */
+        #home {
+            /* background: linear-gradient(135deg, rgba(4, 17, 158, 1), rgba(13, 71, 161, 0.90)); */
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            position: relative;
+        }
+        
+        #about {
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.9), rgba(227, 242, 253, 0.95));
+        }
+        
+        #services {
+            background: linear-gradient(135deg, rgba(227, 242, 253, 0.95), rgba(41, 98, 255, 0.9));
+        }
+        
+        #contact {
+            background: linear-gradient(135deg, rgba(41, 98, 255, 0.9), rgba(26, 35, 126, 0.9));
+        }
+
         .hero-text {
             text-align: center;
             position: relative;
@@ -347,6 +263,7 @@
             background: linear-gradient(45deg, var(--accent), var(--accent-glow));
             border: none;
             padding: 0.75rem 2rem;
+            margin: 1rem;
             border-radius: 50px;
             box-shadow: 0 5px 15px rgba(41, 98, 255, 0.3);
             transition: all 0.3s ease;
@@ -680,12 +597,29 @@
                 typing 3.5s steps(40, end),
                 blink-caret 0.75s step-end infinite;
         }
+
+        /* Multi-line Typing Effect for Smaller Screens */
+        @media (max-width: 768px) {
+            .typing {
+                white-space: pre-wrap; /* Allow text to wrap naturally */
+                display: inline-block;
+                animation: typing-line1 2s steps(30, end) forwards,
+                           typing-line2 2s steps(30, end) 2s forwards,
+                           blink-caret 0.75s step-end infinite;
+            }
+            .typing::after {
+                content: "\A Securing the Future"; /* Second line text */
+                white-space: pre;
+                opacity: 0;
+                animation: fade-in 2s forwards 2s; /* Delay to start after first line */
+            }
+        }
         
         @keyframes typing {
             from { width: 0 }
             to { width: 100% }
         }
-        
+
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: var(--cyber-green); }
@@ -728,13 +662,11 @@
     </style>
 </head>
 <body>
-    <!-- Matrix Rain Canvas - Fixed as background -->
-    <!-- <canvas class="matrix-rain"></canvas> -->
     
     <!-- Navigation -->
-    <header>
+     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="#home">FLIPZERO</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -758,10 +690,9 @@
             </div>
         </nav>
     </header>
-
     <main>
         <!-- Home Section -->
-        <section class="section-first" id="home">
+        <section id="home">
             <div class="cyber-sphere"></div>
             <div class="cyber-grid"></div>
 
@@ -1008,6 +939,7 @@
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
+            const navbarCollapse = document.querySelector(".navbar-collapse");
             
             let current = '';
             
@@ -1021,16 +953,21 @@
             });
             
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
+                link.addEventListener("click", function () {
+                    // Remove active class from all links and add to the clicked link
+                    navLinks.forEach(nav => nav.classList.remove("active"));
+                    this.classList.add("active");
+                
+                    // Check if the navbar is open and collapse it
+                    if (navbarCollapse.classList.contains("show")) {
+                        let bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                        if (bsCollapse) {
+                            bsCollapse.hide();
+                        }
+                    }
+                });
             });
         });
-        
-        // Matrix Rain Effect - Enhanced with gradient colors
-        const canvas = document.querySelector('.matrix-rain');
-        const ctx = canvas.getContext('2d');
 
         // Set canvas to cover the entire viewport
         function resizeCanvas() {
